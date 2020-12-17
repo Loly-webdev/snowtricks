@@ -82,6 +82,9 @@ class User implements UserInterface
      */
     private $videos;
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->tricks = new ArrayCollection();
@@ -270,11 +273,19 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Category|null
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
+    /**
+     * @param Category|null $category
+     *
+     * @return $this
+     */
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
@@ -282,11 +293,19 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Comment|null
+     */
     public function getComment(): ?Comment
     {
         return $this->comment;
     }
 
+    /**
+     * @param Comment|null $comment
+     *
+     * @return $this
+     */
     public function setComment(?Comment $comment): self
     {
         $this->comment = $comment;
@@ -302,6 +321,11 @@ class User implements UserInterface
         return $this->tricks;
     }
 
+    /**
+     * @param Tricks $trick
+     *
+     * @return $this
+     */
     public function addTrick(Tricks $trick): self
     {
         if (!$this->tricks->contains($trick)) {
@@ -312,6 +336,11 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Tricks $trick
+     *
+     * @return $this
+     */
     public function removeTrick(Tricks $trick): self
     {
         if ($this->tricks->removeElement($trick)) {
@@ -332,6 +361,11 @@ class User implements UserInterface
         return $this->pictures;
     }
 
+    /**
+     * @param Picture $picture
+     *
+     * @return $this
+     */
     public function addPicture(Picture $picture): self
     {
         if (!$this->pictures->contains($picture)) {
@@ -342,6 +376,11 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Picture $picture
+     *
+     * @return $this
+     */
     public function removePicture(Picture $picture): self
     {
         if ($this->pictures->removeElement($picture)) {
@@ -362,6 +401,11 @@ class User implements UserInterface
         return $this->videos;
     }
 
+    /**
+     * @param Video $video
+     *
+     * @return $this
+     */
     public function addVideo(Video $video): self
     {
         if (!$this->videos->contains($video)) {
@@ -372,6 +416,11 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Video $video
+     *
+     * @return $this
+     */
     public function removeVideo(Video $video): self
     {
         if ($this->videos->removeElement($video)) {

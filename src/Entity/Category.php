@@ -149,6 +149,11 @@ class Category
         return $this->tricks;
     }
 
+    /**
+     * @param Tricks $trick
+     *
+     * @return $this
+     */
     public function addTrick(Tricks $trick): self
     {
         if (!$this->tricks->contains($trick)) {
@@ -159,6 +164,11 @@ class Category
         return $this;
     }
 
+    /**
+     * @param Tricks $trick
+     *
+     * @return $this
+     */
     public function removeTrick(Tricks $trick): self
     {
         if ($this->tricks->removeElement($trick)) {
