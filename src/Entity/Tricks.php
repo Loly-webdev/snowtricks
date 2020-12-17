@@ -56,6 +56,11 @@ class Tricks
     private $userId;
 
     /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="tricksId")
+     */
+    private $comments;
+
+    /**
      * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="tricksId")
      */
     private $pictures;
@@ -69,6 +74,7 @@ class Tricks
     {
         $this->pictures = new ArrayCollection();
         $this->videos = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -257,6 +263,36 @@ class Tricks
             // set the owning side to null (unless already changed)
             if ($video->getTricksId() === $this) {
                 $video->setTricksId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setTricksId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getTricksId() === $this) {
+                $comment->setTricksId(null);
             }
         }
 

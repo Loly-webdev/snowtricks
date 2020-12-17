@@ -41,20 +41,14 @@ class Comment
     private $updated_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comment")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      */
     private $userId;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Tricks::class, inversedBy="comment")
+     * @ORM\ManyToOne(targetEntity=Tricks::class, inversedBy="comments")
      */
     private $tricksId;
-
-    public function __construct()
-    {
-        $this->userId = new ArrayCollection();
-        $this->tricksId = new ArrayCollection();
-    }
 
     /**
      * @return int|null
@@ -145,62 +139,39 @@ class Comment
     }
 
     /**
-     * @return Collection|User[]
+     * @param User|null $userId
+     *
+     * @return $this
      */
-    public function getUserId(): Collection
+    public function setUserId(?User $userId): self
     {
-        return $this->userId;
-    }
-
-    public function addUserId(User $userId): self
-    {
-        if (!$this->userId->contains($userId)) {
-            $this->userId[] = $userId;
-            $userId->setComment($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserId(User $userId): self
-    {
-        if ($this->userId->removeElement($userId)) {
-            // set the owning side to null (unless already changed)
-            if ($userId->getComment() === $this) {
-                $userId->setComment(null);
-            }
-        }
+        $this->userId = $userId;
 
         return $this;
     }
 
     /**
-     * @return Collection|Tricks[]
+     * @return Tricks|null
      */
-    public function getTricksId(): Collection
+    public function getTricksId(): ?Tricks
     {
         return $this->tricksId;
     }
 
-    public function addTricksId(Tricks $tricksId): self
+    /**
+     * @param Tricks|null $tricksId
+     *
+     * @return $this
+     */
+    public function setTricksId(?Tricks $tricksId): self
     {
-        if (!$this->tricksId->contains($tricksId)) {
-            $this->tricksId[] = $tricksId;
-            $tricksId->setComment($this);
-        }
+        $this->tricksId = $tricksId;
 
         return $this;
     }
 
-    public function removeTricksId(Tricks $tricksId): self
+    public function getUserId(): ?User
     {
-        if ($this->tricksId->removeElement($tricksId)) {
-            // set the owning side to null (unless already changed)
-            if ($tricksId->getComment() === $this) {
-                $tricksId->setComment(null);
-            }
-        }
-
-        return $this;
+        return $this->userId;
     }
 }

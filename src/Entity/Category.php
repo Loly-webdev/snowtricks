@@ -50,7 +50,6 @@ class Category
      */
     public function __construct()
     {
-        $this->userId = new ArrayCollection();
         $this->tricks = new ArrayCollection();
     }
 
@@ -123,41 +122,21 @@ class Category
     }
 
     /**
-     * @return Collection|User[]
+     * @return User|null
      */
-    public function getUserId(): Collection
+    public function getUserId(): ?User
     {
         return $this->userId;
     }
 
     /**
-     * @param User $userId
+     * @param User|null $userId
      *
      * @return $this
      */
-    public function addUserId(User $userId): self
+    public function setUserId(?User $userId): self
     {
-        if (!$this->userId->contains($userId)) {
-            $this->userId[] = $userId;
-            $userId->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param User $userId
-     *
-     * @return $this
-     */
-    public function removeUserId(User $userId): self
-    {
-        if ($this->userId->removeElement($userId)) {
-            // set the owning side to null (unless already changed)
-            if ($userId->getCategory() === $this) {
-                $userId->setCategory(null);
-            }
-        }
+        $this->userId = $userId;
 
         return $this;
     }
