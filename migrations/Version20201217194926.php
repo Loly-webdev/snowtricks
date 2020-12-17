@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20201217144415 extends AbstractMigration
+final class Version20201217194926 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -23,7 +23,7 @@ final class Version20201217144415 extends AbstractMigration
         $this->addSql('ALTER TABLE category ADD user_id_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE category ADD CONSTRAINT FK_64C19C19D86650F FOREIGN KEY (user_id_id) REFERENCES user (id)');
         $this->addSql('CREATE INDEX IDX_64C19C19D86650F ON category (user_id_id)');
-        $this->addSql('ALTER TABLE comment ADD user_id_id INT DEFAULT NULL, ADD tricks_id_id INT DEFAULT NULL, DROP user_id, DROP tricks_id');
+        $this->addSql('ALTER TABLE comment ADD user_id_id INT DEFAULT NULL, ADD tricks_id_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526C9D86650F FOREIGN KEY (user_id_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526CA674A03E FOREIGN KEY (tricks_id_id) REFERENCES tricks (id)');
         $this->addSql('CREATE INDEX IDX_9474526C9D86650F ON comment (user_id_id)');
@@ -60,7 +60,7 @@ final class Version20201217144415 extends AbstractMigration
         $this->addSql('ALTER TABLE comment DROP FOREIGN KEY FK_9474526CA674A03E');
         $this->addSql('DROP INDEX IDX_9474526C9D86650F ON comment');
         $this->addSql('DROP INDEX IDX_9474526CA674A03E ON comment');
-        $this->addSql('ALTER TABLE comment ADD user_id INT DEFAULT NULL, ADD tricks_id INT DEFAULT NULL, DROP user_id_id, DROP tricks_id_id');
+        $this->addSql('ALTER TABLE comment DROP user_id_id, DROP tricks_id_id');
         $this->addSql('ALTER TABLE picture DROP FOREIGN KEY FK_16DB4F899D86650F');
         $this->addSql('ALTER TABLE picture DROP FOREIGN KEY FK_16DB4F89A674A03E');
         $this->addSql('DROP INDEX IDX_16DB4F899D86650F ON picture');
