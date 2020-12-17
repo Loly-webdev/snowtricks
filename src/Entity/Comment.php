@@ -170,6 +170,9 @@ class Comment
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUserId(): ?User
     {
         return $this->userId;

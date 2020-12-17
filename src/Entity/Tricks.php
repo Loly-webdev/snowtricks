@@ -70,6 +70,9 @@ class Tricks
      */
     private $videos;
 
+    /**
+     * Tricks constructor.
+     */
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
@@ -185,11 +188,19 @@ class Tricks
         return $this;
     }
 
+    /**
+     * @return Category|null
+     */
     public function getCategoryId(): ?Category
     {
         return $this->categoryId;
     }
 
+    /**
+     * @param Category|null $categoryId
+     *
+     * @return $this
+     */
     public function setCategoryId(?Category $categoryId): self
     {
         $this->categoryId = $categoryId;
@@ -197,11 +208,19 @@ class Tricks
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUserId(): ?User
     {
         return $this->userId;
     }
 
+    /**
+     * @param User|null $userId
+     *
+     * @return $this
+     */
     public function setUserId(?User $userId): self
     {
         $this->userId = $userId;
@@ -217,6 +236,11 @@ class Tricks
         return $this->pictures;
     }
 
+    /**
+     * @param Picture $picture
+     *
+     * @return $this
+     */
     public function addPicture(Picture $picture): self
     {
         if (!$this->pictures->contains($picture)) {
@@ -227,6 +251,11 @@ class Tricks
         return $this;
     }
 
+    /**
+     * @param Picture $picture
+     *
+     * @return $this
+     */
     public function removePicture(Picture $picture): self
     {
         if ($this->pictures->removeElement($picture)) {
@@ -247,6 +276,11 @@ class Tricks
         return $this->videos;
     }
 
+    /**
+     * @param Video $video
+     *
+     * @return $this
+     */
     public function addVideo(Video $video): self
     {
         if (!$this->videos->contains($video)) {
@@ -257,6 +291,11 @@ class Tricks
         return $this;
     }
 
+    /**
+     * @param Video $video
+     *
+     * @return $this
+     */
     public function removeVideo(Video $video): self
     {
         if ($this->videos->removeElement($video)) {
@@ -277,6 +316,11 @@ class Tricks
         return $this->comments;
     }
 
+    /**
+     * @param Comment $comment
+     *
+     * @return $this
+     */
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
@@ -287,6 +331,11 @@ class Tricks
         return $this;
     }
 
+    /**
+     * @param Comment $comment
+     *
+     * @return $this
+     */
     public function removeComment(Comment $comment): self
     {
         if ($this->comments->removeElement($comment)) {

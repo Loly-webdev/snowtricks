@@ -136,11 +136,19 @@ class Picture
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUserId(): ?User
     {
         return $this->userId;
     }
 
+    /**
+     * @param User|null $userId
+     *
+     * @return $this
+     */
     public function setUserId(?User $userId): self
     {
         $this->userId = $userId;
@@ -148,11 +156,19 @@ class Picture
         return $this;
     }
 
+    /**
+     * @return Tricks|null
+     */
     public function getTricksId(): ?Tricks
     {
         return $this->tricksId;
     }
 
+    /**
+     * @param Tricks|null $tricksId
+     *
+     * @return $this
+     */
     public function setTricksId(?Tricks $tricksId): self
     {
         $this->tricksId = $tricksId;
