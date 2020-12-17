@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\TricksRepository;
+use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,16 +19,6 @@ class Tricks
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $category_id;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $user_id;
 
     /**
      * @ORM\Column(type="string", length=150)
@@ -52,40 +45,53 @@ class Tricks
      */
     private $updated_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="tricks")
+     */
+    private $categoryId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tricks")
+     */
+    private $userId;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="tricksId")
+     */
+    private $pictures;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="tricksId")
+     */
+    private $videos;
+
+    public function __construct()
+    {
+        $this->pictures = new ArrayCollection();
+        $this->videos = new ArrayCollection();
+    }
+
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCategoryId(): ?int
-    {
-        return $this->category_id;
-    }
-
-    public function setCategoryId(?int $category_id): self
-    {
-        $this->category_id = $category_id;
-
-        return $this;
-    }
-
-    public function getUserId(): ?int
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(?int $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }
-
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     *
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -93,11 +99,19 @@ class Tricks
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getAuthor(): ?string
     {
         return $this->author;
     }
 
+    /**
+     * @param string $author
+     *
+     * @return $this
+     */
     public function setAuthor(string $author): self
     {
         $this->author = $author;
@@ -105,11 +119,19 @@ class Tricks
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * @param string $content
+     *
+     * @return $this
+     */
     public function setContent(string $content): self
     {
         $this->content = $content;
@@ -117,26 +139,126 @@ class Tricks
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    /**
+     * @param DateTimeInterface $created_at
+     *
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    /**
+     * @param DateTimeInterface $updated_at
+     *
+     * @return $this
+     */
+    public function setUpdatedAt(DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getCategoryId(): ?Category
+    {
+        return $this->categoryId;
+    }
+
+    public function setCategoryId(?Category $categoryId): self
+    {
+        $this->categoryId = $categoryId;
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(?User $userId): self
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Picture[]
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function addPicture(Picture $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+            $picture->setTricksId($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): self
+    {
+        if ($this->pictures->removeElement($picture)) {
+            // set the owning side to null (unless already changed)
+            if ($picture->getTricksId() === $this) {
+                $picture->setTricksId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos[] = $video;
+            $video->setTricksId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): self
+    {
+        if ($this->videos->removeElement($video)) {
+            // set the owning side to null (unless already changed)
+            if ($video->getTricksId() === $this) {
+                $video->setTricksId(null);
+            }
+        }
 
         return $this;
     }
