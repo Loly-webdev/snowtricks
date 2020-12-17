@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PictureRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,16 +17,6 @@ class Picture
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $user_id;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $tricks_id;
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -47,40 +38,37 @@ class Picture
      */
     private $updated_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pictures")
+     */
+    private $userId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Tricks::class, inversedBy="pictures")
+     */
+    private $tricksId;
+
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUserId(): ?int
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(?int $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }
-
-    public function getTricksId(): ?int
-    {
-        return $this->tricks_id;
-    }
-
-    public function setTricksId(?int $tricks_id): self
-    {
-        $this->tricks_id = $tricks_id;
-
-        return $this;
-    }
-
+    /**
+     * @return string|null
+     */
     public function getAuthor(): ?string
     {
         return $this->author;
     }
 
+    /**
+     * @param string $author
+     *
+     * @return $this
+     */
     public function setAuthor(string $author): self
     {
         $this->author = $author;
@@ -88,11 +76,19 @@ class Picture
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPath(): ?string
     {
         return $this->path;
     }
 
+    /**
+     * @param string $path
+     *
+     * @return $this
+     */
     public function setPath(string $path): self
     {
         $this->path = $path;
@@ -100,26 +96,66 @@ class Picture
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    /**
+     * @param DateTimeInterface $created_at
+     *
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    /**
+     * @param DateTimeInterface $updated_at
+     *
+     * @return $this
+     */
+    public function setUpdatedAt(DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(?User $userId): self
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function getTricksId(): ?Tricks
+    {
+        return $this->tricksId;
+    }
+
+    public function setTricksId(?Tricks $tricksId): self
+    {
+        $this->tricksId = $tricksId;
 
         return $this;
     }
