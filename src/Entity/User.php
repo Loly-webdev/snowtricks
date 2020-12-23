@@ -88,6 +88,10 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+    /**
+     *
+     */
+    private $salt;
 
     /**
      * User constructor.
@@ -187,7 +191,7 @@ class User implements UserInterface
      */
     public function getSalt(): ?string
     {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+        return $this->salt;
     }
 
     /**
@@ -440,11 +444,19 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function isVerified(): bool
     {
         return $this->isVerified;
     }
 
+    /**
+     * @param bool $isVerified
+     *
+     * @return $this
+     */
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
