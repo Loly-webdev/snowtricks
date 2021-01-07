@@ -60,19 +60,19 @@ class User implements UserInterface
     private $updated_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="userId")
+     * @ORM\OneToMany(targetEntity=Category::class, mappedBy="userId")
      */
-    private $category;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Comment::class, inversedBy="userId")
-     */
-    private $comment;
+    private $categories;
 
     /**
      * @ORM\OneToMany(targetEntity=Tricks::class, mappedBy="userId")
      */
     private $tricks;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="userId")
+     */
+    private $comments;
 
     /**
      * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="userId")
@@ -98,9 +98,11 @@ class User implements UserInterface
      */
     public function __construct()
     {
-        $this->tricks = new ArrayCollection();
-        $this->pictures = new ArrayCollection();
-        $this->videos = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->tricks     = new ArrayCollection();
+        $this->comments   = new ArrayCollection();
+        $this->pictures   = new ArrayCollection();
+        $this->videos     = new ArrayCollection();
     }
 
     /**
@@ -133,12 +135,11 @@ class User implements UserInterface
 
     /**
      * A visual identifier that represents this user.
-     *
      * @see UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -170,7 +171,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     /**
@@ -285,41 +286,41 @@ class User implements UserInterface
     }
 
     /**
-     * @return Category|null
+     * @return Collection|Category[]
      */
-    public function getCategory(): ?Category
+    public function getCategories(): Collection
     {
-        return $this->category;
+        return $this->categories;
     }
 
     /**
-     * @param Category|null $category
+     * @param Category $category
      *
      * @return $this
      */
-    public function setCategory(?Category $category): self
+    public function addCategory(Category $category): self
     {
-        $this->category = $category;
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->setUserId($this);
+        }
 
         return $this;
     }
 
     /**
-     * @return Comment|null
-     */
-    public function getComment(): ?Comment
-    {
-        return $this->comment;
-    }
-
-    /**
-     * @param Comment|null $comment
+     * @param Category $category
      *
      * @return $this
      */
-    public function setComment(?Comment $comment): self
+    public function removeCategory(Category $category): self
     {
-        $this->comment = $comment;
+        if ($this->categories->removeElement($category)) {
+            // set the owning side to null (unless already changed)
+            if ($category->getUserId() === $this) {
+                $category->setUserId(null);
+            }
+        }
 
         return $this;
     }
@@ -358,6 +359,47 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($trick->getUserId() === $this) {
                 $trick->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Comment $comment
+     *
+     * @return $this
+     */
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Comment $comment
+     *
+     * @return $this
+     */
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getUserId() === $this) {
+                $comment->setUserId(null);
             }
         }
 
