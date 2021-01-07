@@ -20,6 +20,7 @@ class UserFixtures extends Fixture
     {
         for ($count = 0; $count < 20; $count++) {
             $user = new User();
+            $user->setRoles(["user"]);
             $user->setEmail("email@" . $count);
             $user->setPassword("Pass" . $count);
             $user->setLogin("Login" . $count);
