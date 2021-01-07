@@ -7,10 +7,10 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 /**
- * Class AppFixtures
+ * Class TricksFixtures
  * @package App\DataFixtures
  */
-class AppFixtures extends Fixture
+class TricksFixtures extends Fixture
 {
     /**
      * @param ObjectManager $manager
@@ -18,12 +18,13 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         for ($count = 0; $count < 20; $count++) {
-            $article = new Tricks();
-            $article->setTitle("Titre " . $count);
-            $article->setAuthor("Auteur " . $count);
-            $article->setContent("Content " . $count);
-            $article->setCategoryId("Category " . $count);
-            $manager->persist($article);
+            $trick = new Tricks();
+            $trick->setTitle("Titre " . $count);
+            $trick->setAuthor("Auteur " . $count);
+            $trick->setContent("Content " . $count);
+            $trick->setCreatedAt(new \DateTime("now"));
+            $trick->setUpdatedAt(new \DateTime("now"));
+            $manager->persist($trick);
         }
         $manager->flush();
     }
