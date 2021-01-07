@@ -26,6 +26,7 @@ class Category
     private $name;
 
     /**
+     * @ORM\GeneratedValue
      * @ORM\Column(type="datetime")
      */
     private $created_at;
