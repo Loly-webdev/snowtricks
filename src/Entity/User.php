@@ -21,12 +21,27 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * })
  * @ORM\Entity
  */
-class User
+class User implements \Symfony\Component\Security\Core\User\UserInterface
 {
+    /**
+     *
+     */
     public const ROLE_ADMIN       = 'admin';
+    /**
+     *
+     */
     public const ROLE_USER        = 'user';
+    /**
+     *
+     */
     public const ROLE_ADMIN_LABEL = 'Administrateur';
+    /**
+     *
+     */
     public const ROLE_USER_LABEL = 'Utilisateur';
+    /**
+     *
+     */
     public const ROLES = [
         self::ROLE_ADMIN => self::ROLE_ADMIN_LABEL,
         self::ROLE_USER  => self::ROLE_USER_LABEL
@@ -120,7 +135,12 @@ class User
      *
      * @ORM\Column(name="is_verified", type="boolean", nullable=false)
      */
-    private $isVerified;
+    private $isVerified = false;
+
+    /**
+     * @var string
+     */
+    private $salt;
 
     /**
      * User constructor.
@@ -238,6 +258,25 @@ class User
 
     /**
      * @return string|null
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return $this->salt;
+    }
+
+    /**
+     * @return void
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    /**
+     * @return string|null
      */
     public function getLogin(): ?string
     {
@@ -254,6 +293,15 @@ class User
         $this->login = $login;
 
         return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return $this->login;
     }
 
     /**
@@ -537,11 +585,19 @@ class User
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getRoles(): ?string
     {
         return $this->roles;
     }
 
+    /**
+     * @param string $roles
+     *
+     * @return $this
+     */
     public function setRoles(string $roles): self
     {
         $this->roles = $roles;
