@@ -34,6 +34,13 @@ class Picture
     /**
      * @var string
      *
+     * @ORM\Column(name="title", type="string", length=150, nullable=false)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="path", type="string", length=100, nullable=false)
      */
     private $path;
@@ -96,6 +103,26 @@ class Picture
     public function setAuthor(string $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return $this
+     */
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }
