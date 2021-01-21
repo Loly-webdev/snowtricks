@@ -3,46 +3,64 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ * Category
+ *
+ * @ORM\Table(name="category", indexes={
+ *     @ORM\Index(name="IDX_64C19C19D86650F", columns={"user_id_id"})
+ * })
+ * @ORM\Entity
  */
 class Category
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=100, nullable=false)
      */
     private $name;
 
     /**
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="datetime")
+     * @var DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
-    private $created_at;
+    private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="category")
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $userId;
 
     /**
-     * @ORM\OneToMany(targetEntity=Tricks::class, mappedBy="categoryId")
+     * @ORM\OneToMany(targetEntity="Tricks", mappedBy="categoryId")
      */
     private $tricks;
 
@@ -87,17 +105,17 @@ class Category
      */
     public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
-     * @param DateTimeInterface $created_at
+     * @param DateTimeInterface $createdAt
      *
      * @return $this
      */
-    public function setCreatedAt(DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -107,17 +125,17 @@ class Category
      */
     public function getUpdatedAt(): ?DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
-     * @param DateTimeInterface $updated_at
+     * @param DateTimeInterface $updatedAt
      *
      * @return $this
      */
-    public function setUpdatedAt(DateTimeInterface $updated_at): self
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
