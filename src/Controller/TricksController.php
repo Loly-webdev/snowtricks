@@ -29,7 +29,10 @@ class TricksController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="tricks_new", methods={"GET","POST"})
+     * @Route("/add", name="app_tricks_add", methods={"GET","POST"})
+     * @param Request $request
+     *
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -42,7 +45,7 @@ class TricksController extends AbstractController
             $entityManager->persist($trick);
             $entityManager->flush();
 
-            return $this->redirectToRoute('tricks_index');
+            return $this->redirectToRoute('app_tricks');
         }
 
         return $this->render('tricks/new.html.twig', [
@@ -52,7 +55,10 @@ class TricksController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="tricks_show", methods={"GET"})
+     * @Route("/{id}", name="app_tricks_show", methods={"GET"})
+     * @param Tricks $trick
+     *
+     * @return Response
      */
     public function show(Tricks $trick): Response
     {
@@ -62,7 +68,11 @@ class TricksController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="tricks_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="app_tricks_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Tricks  $trick
+     *
+     * @return Response
      */
     public function edit(Request $request, Tricks $trick): Response
     {
@@ -72,7 +82,7 @@ class TricksController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tricks_index');
+            return $this->redirectToRoute('app_tricks');
         }
 
         return $this->render('tricks/edit.html.twig', [
@@ -82,7 +92,11 @@ class TricksController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="tricks_delete", methods={"DELETE"})
+     * @Route("/{id}", name="app_tricks_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Tricks  $trick
+     *
+     * @return Response
      */
     public function delete(Request $request, Tricks $trick): Response
     {
@@ -92,6 +106,6 @@ class TricksController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('tricks_index');
+        return $this->redirectToRoute('app_tricks');
     }
 }

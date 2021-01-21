@@ -24,8 +24,8 @@
                 <td>{{ trick.createdAt ? trick.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ trick.updatedAt ? trick.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('tricks_show', {'id': trick.id}) }}">show</a>
-                    <a href="{{ path('tricks_edit', {'id': trick.id}) }}">edit</a>
+                    <a href="{{ path('app_tricks_show', {'id': trick.id}) }}">show</a>
+                    <a href="{{ path('app_tricks_edit', {'id': trick.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -36,5 +36,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('tricks_new') }}">Create new</a>
+    <a href="{{ path('app_tricks_add') }}">Create new</a>
 {% endblock %}
