@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b166fe67-dffe-4d94-94de-5b7e68a60709" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210121111013.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Picture.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Picture.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Video.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Video.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/PlopController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/TricksController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/TricksType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/plop/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/tricks/_delete_form.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/tricks/_form.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/tricks/edit.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/tricks/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/tricks/new.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/tricks/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
