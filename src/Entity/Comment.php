@@ -3,50 +3,74 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CommentRepository::class)
+ * Comment
+ *
+ * @ORM\Table(name="comment", indexes={@ORM\Index(name="IDX_9474526CA674A03E", columns={"tricks_id_id"}), @ORM\Index(name="IDX_9474526C9D86650F", columns={"user_id_id"})})
+ * @ORM\Entity
  */
 class Comment
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @var string
+     *
+     * @ORM\Column(name="author", type="string", length=30, nullable=false)
      */
     private $author;
 
     /**
-     * @ORM\Column(type="text")
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text", length=0, nullable=false)
      */
     private $content;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
-    private $created_at;
+    private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $userId;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Tricks::class, inversedBy="comments")
+     * @var Tricks
+     *
+     * @ORM\ManyToOne(targetEntity="Tricks")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tricks_id_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $tricksId;
 
@@ -103,17 +127,17 @@ class Comment
      */
     public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
-     * @param DateTimeInterface $created_at
+     * @param DateTimeInterface $createdAt
      *
      * @return $this
      */
-    public function setCreatedAt(DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -123,19 +147,27 @@ class Comment
      */
     public function getUpdatedAt(): ?DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
-     * @param DateTimeInterface $updated_at
+     * @param DateTimeInterface $updatedAt
      *
      * @return $this
      */
-    public function setUpdatedAt(DateTimeInterface $updated_at): self
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getUserId(): ?User
+    {
+        return $this->userId;
     }
 
     /**
@@ -168,13 +200,5 @@ class Comment
         $this->tricksId = $tricksId;
 
         return $this;
-    }
-
-    /**
-     * @return User|null
-     */
-    public function getUserId(): ?User
-    {
-        return $this->userId;
     }
 }

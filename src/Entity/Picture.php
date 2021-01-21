@@ -3,48 +3,72 @@
 namespace App\Entity;
 
 use App\Repository\PictureRepository;
+use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PictureRepository::class)
+ * Picture
+ *
+ * @ORM\Table(name="picture", indexes={@ORM\Index(name="IDX_16DB4F89A674A03E", columns={"tricks_id_id"}), @ORM\Index(name="IDX_16DB4F899D86650F", columns={"user_id_id"})})
+ * @ORM\Entity
  */
 class Picture
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @var string
+     *
+     * @ORM\Column(name="author", type="string", length=30, nullable=false)
      */
     private $author;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=100, nullable=false)
      */
     private $path;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
-    private $created_at;
+    private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pictures")
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $userId;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Tricks::class, inversedBy="pictures")
+     * @var Tricks
+     *
+     * @ORM\ManyToOne(targetEntity="Tricks")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tricks_id_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $tricksId;
 
@@ -101,17 +125,17 @@ class Picture
      */
     public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
-     * @param DateTimeInterface $created_at
+     * @param DateTimeInterface $createdAt
      *
      * @return $this
      */
-    public function setCreatedAt(DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -121,17 +145,17 @@ class Picture
      */
     public function getUpdatedAt(): ?DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
-     * @param DateTimeInterface $updated_at
+     * @param DateTimeInterface $updatedAt
      *
      * @return $this
      */
-    public function setUpdatedAt(DateTimeInterface $updated_at): self
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
