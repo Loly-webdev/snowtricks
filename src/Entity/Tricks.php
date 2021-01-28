@@ -3,70 +3,96 @@
 namespace App\Entity;
 
 use App\Repository\TricksRepository;
+use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=TricksRepository::class)
+ * Tricks
+ *
+ * @ORM\Table(name="tricks", indexes={@ORM\Index(name="IDX_E1D902C19D86650F", columns={"user_id_id"}), @ORM\Index(name="IDX_E1D902C19777D11E", columns={"category_id_id"})})
+ * @ORM\Entity
  */
 class Tricks
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=150, nullable=false)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @var string
+     *
+     * @ORM\Column(name="author", type="string", length=30, nullable=false)
      */
     private $author;
 
     /**
-     * @ORM\Column(type="text")
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text", length=0, nullable=false)
      */
     private $content;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
-    private $created_at;
+    private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="tricks")
+     * @var Category
+     *
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_id_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $categoryId;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tricks")
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $userId;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="tricksId")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="tricksId")
      */
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="tricksId")
+     * @ORM\OneToMany(targetEntity="Picture", mappedBy="tricksId")
      */
     private $pictures;
 
     /**
-     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="tricksId")
+     * @ORM\OneToMany(targetEntity="Video", mappedBy="tricksId")
      */
     private $videos;
 
@@ -79,6 +105,7 @@ class Tricks
         $this->videos = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
+
 
     /**
      * @return int|null
@@ -153,17 +180,17 @@ class Tricks
      */
     public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
-     * @param DateTimeInterface $created_at
+     * @param DateTimeInterface $createdAt
      *
      * @return $this
      */
-    public function setCreatedAt(DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -173,17 +200,17 @@ class Tricks
      */
     public function getUpdatedAt(): ?DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
-     * @param DateTimeInterface $updated_at
+     * @param DateTimeInterface $updatedAt
      *
      * @return $this
      */
-    public function setUpdatedAt(DateTimeInterface $updated_at): self
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
