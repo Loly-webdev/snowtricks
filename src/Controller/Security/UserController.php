@@ -43,13 +43,14 @@ class UserController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('user/profile.html.twig', [
+        return $this->render('security/profile.html.twig', [
             'controller_name' => 'UserController',
+            'user' => $this->getUser()
         ]);
     }
 
     /**
-     * @Route("/mon-compte", name="profile")
+     * @Route("/profile-edit", name="profile")
      * @IsGranted("ROLE_USER")
      * @param Request        $request
      * @param UploaderHelper $uploaderHelper
@@ -98,7 +99,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $user = $userRepository->findOneByEmail($data['email']);
+            $user = $userRepository->findOneBy($data['email']);
 
             if (!$user) {
                 $this->addFlash('error', 'Cette adresse e-mail est inconnue');

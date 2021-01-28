@@ -65,9 +65,9 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
 ";
         // line 12
         $this->displayBlock('body', $context, $blocks);
-        // line 25
+        // line 32
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 28
+        // line 35
         echo "</body>
 </html>
 ";
@@ -141,16 +141,47 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
         echo "
     </header>
     <main class=\"mt-5 mx-0 p-0\">
-        <div class=\"container-fluid px-4 py-5\">
+        ";
+        // line 17
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 17, $this->source); })()), "flashes", [], "any", false, false, false, 17));
+        foreach ($context['_seq'] as $context["label"] => $context["messages"]) {
+            // line 18
+            echo "            <div class=\"";
+            echo twig_escape_filter($this->env, $context["label"], "html", null, true);
+            echo "\">
+                ";
+            // line 19
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable($context["messages"]);
+            foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
+                // line 20
+                echo "                    <p>";
+                echo twig_escape_filter($this->env, $context["message"], "html", null, true);
+                echo "</p>
+                ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 22
+            echo "            </div>
+        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['label'], $context['messages'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 24
+        echo "        <div class=\"container-fluid px-4 py-5\">
             ";
-        // line 18
+        // line 25
         $this->displayBlock('content', $context, $blocks);
-        // line 19
+        // line 26
         echo "        </div>
     </main>
     <footer class=\"fixed-bottom bg-dark text-secondary\">
         ";
-        // line 22
+        // line 29
         echo twig_include($this->env, $context, "partial/_footer.html.twig");
         echo "
     </footer>
@@ -163,7 +194,7 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
 
     }
 
-    // line 18
+    // line 25
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -181,7 +212,7 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
 
     }
 
-    // line 25
+    // line 32
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -191,7 +222,7 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 26
+        // line 33
         echo "    ";
         echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackScriptTags("app");
         echo "
@@ -216,7 +247,7 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
 
     public function getDebugInfo()
     {
-        return array (  195 => 26,  185 => 25,  167 => 18,  154 => 22,  149 => 19,  147 => 18,  140 => 14,  137 => 13,  127 => 12,  114 => 8,  112 => 7,  102 => 6,  83 => 5,  71 => 28,  69 => 25,  67 => 12,  63 => 10,  61 => 6,  57 => 5,  53 => 4,  48 => 1,);
+        return array (  226 => 33,  216 => 32,  198 => 25,  185 => 29,  180 => 26,  178 => 25,  175 => 24,  168 => 22,  159 => 20,  155 => 19,  150 => 18,  146 => 17,  140 => 14,  137 => 13,  127 => 12,  114 => 8,  112 => 7,  102 => 6,  83 => 5,  71 => 35,  69 => 32,  67 => 12,  63 => 10,  61 => 6,  57 => 5,  53 => 4,  48 => 1,);
     }
 
     public function getSourceContext()
@@ -237,6 +268,13 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
         {{ include('partial/_nav.html.twig') }}
     </header>
     <main class=\"mt-5 mx-0 p-0\">
+        {% for label, messages in app.flashes %}
+            <div class=\"{{ label }}\">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
         <div class=\"container-fluid px-4 py-5\">
             {% block content %}{% endblock %}
         </div>

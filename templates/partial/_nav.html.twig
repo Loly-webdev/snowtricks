@@ -9,39 +9,47 @@
     <div class="collapse navbar-collapse justify-content-end text-uppercase" id="navbarSupportedContent">
         <ul class="navbar-nav">
             <li id="home" class="active nav-item">
-                <a class="nav-link" href="/">
-                    <span class="fas fa-home"></span>
-                    Accueil
+                <a class="nav-link" href="{{ path('home') }}">
+                <span class="fas fa-home"></span>
+                Accueil
                 </a>
             </li>
-        </ul>
-        <ul class="navbar-nav">
-            <li id="profile" class="active nav-item">
-                <a class="nav-link" href="/profil">
-                    <span class="fas fa-user"></span>
-                    Profil
-                </a>
-            </li>
-        </ul>
-        <ul class="navbar-nav">
             <li id="tricks" class="active nav-item">
-                <a class="nav-link" href="/tricks">
+                <a class="nav-link" href="{{ path('tricks') }}">
                     <span class="fas fa-user"></span>
                     Tricks
                 </a>
             </li>
+            {% if app.user %}
+                <li id="new-trick" class="active nav-item">
+                    <a class="nav-link" href="{{ path('trick_new') }}">Nouvelle trick</a>
+                </li>
+                <li id="profile" class="active nav-item">
+                    <a class="nav-link" href="{{ path('profile') }}">
+                        <span class="fas fa-user"></span>
+                        Profil
+                    </a>
+                </li>
+                <div class="text-center m-1">
+                    <a id="authentication" href="{{ path('logout') }}" class="btn btn-outline-error">
+                        <span class="fas fa-sign-in-alt"></span>
+                        Off
+                    </a>
+                </div>
+            {% else %}
+                <div class="text-center m-1">
+                    <a id="register" href="{{ path('register') }}" class="btn btn-outline-primary">
+                        <span class="fas fa-file-signature"></span>
+                        Inscription
+                    </a>
+                </div>
+                <div class="text-center m-1">
+                    <a id="authentication" href="{{ path('login') }}" class="btn btn-outline-success">
+                        <span class="fas fa-sign-in-alt"></span>
+                        On
+                    </a>
+                </div>
+            {% endif %}
         </ul>
-        <div class="text-center m-1">
-            <a id="register" href="/inscription" class="btn btn-outline-primary">
-                <span class="fas fa-file-signature"></span>
-                Inscription
-            </a>
-        </div>
-        <div class="text-center m-1">
-            <a id="authentication" href="/login" class="btn btn-outline-success">
-                <span class="fas fa-sign-in-alt"></span>
-                Connection
-            </a>
-        </div>
     </div>
 </nav>

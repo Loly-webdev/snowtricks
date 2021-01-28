@@ -54,40 +54,76 @@ class __TwigTemplate_2b9516bfa996768c5701746d40260ebdf309acbe2016696fbb547fdf3c1
     <div class=\"collapse navbar-collapse justify-content-end text-uppercase\" id=\"navbarSupportedContent\">
         <ul class=\"navbar-nav\">
             <li id=\"home\" class=\"active nav-item\">
-                <a class=\"nav-link\" href=\"/\">
-                    <span class=\"fas fa-home\"></span>
-                    Accueil
+                <a class=\"nav-link\" href=\"";
+        // line 12
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("home");
+        echo "\">
+                <span class=\"fas fa-home\"></span>
+                Accueil
                 </a>
             </li>
-        </ul>
-        <ul class=\"navbar-nav\">
-            <li id=\"profile\" class=\"active nav-item\">
-                <a class=\"nav-link\" href=\"/profil\">
-                    <span class=\"fas fa-user\"></span>
-                    Profil
-                </a>
-            </li>
-        </ul>
-        <ul class=\"navbar-nav\">
             <li id=\"tricks\" class=\"active nav-item\">
-                <a class=\"nav-link\" href=\"/tricks\">
+                <a class=\"nav-link\" href=\"";
+        // line 18
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("tricks");
+        echo "\">
                     <span class=\"fas fa-user\"></span>
                     Tricks
                 </a>
             </li>
-        </ul>
-        <div class=\"text-center m-1\">
-            <a id=\"register\" href=\"/inscription\" class=\"btn btn-outline-primary\">
-                <span class=\"fas fa-file-signature\"></span>
-                Inscription
-            </a>
-        </div>
-        <div class=\"text-center m-1\">
-            <a id=\"authentication\" href=\"/login\" class=\"btn btn-outline-success\">
-                <span class=\"fas fa-sign-in-alt\"></span>
-                Connection
-            </a>
-        </div>
+            ";
+        // line 23
+        if (twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 23, $this->source); })()), "user", [], "any", false, false, false, 23)) {
+            // line 24
+            echo "                <li id=\"new-trick\" class=\"active nav-item\">
+                    <a class=\"nav-link\" href=\"";
+            // line 25
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("trick_new");
+            echo "\">Nouvelle trick</a>
+                </li>
+                <li id=\"profile\" class=\"active nav-item\">
+                    <a class=\"nav-link\" href=\"";
+            // line 28
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("profile");
+            echo "\">
+                        <span class=\"fas fa-user\"></span>
+                        Profil
+                    </a>
+                </li>
+                <div class=\"text-center m-1\">
+                    <a id=\"authentication\" href=\"";
+            // line 34
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("logout");
+            echo "\" class=\"btn btn-outline-error\">
+                        <span class=\"fas fa-sign-in-alt\"></span>
+                        Off
+                    </a>
+                </div>
+            ";
+        } else {
+            // line 40
+            echo "                <div class=\"text-center m-1\">
+                    <a id=\"register\" href=\"";
+            // line 41
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("register");
+            echo "\" class=\"btn btn-outline-primary\">
+                        <span class=\"fas fa-file-signature\"></span>
+                        Inscription
+                    </a>
+                </div>
+                <div class=\"text-center m-1\">
+                    <a id=\"authentication\" href=\"";
+            // line 47
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("login");
+            echo "\" class=\"btn btn-outline-success\">
+                        <span class=\"fas fa-sign-in-alt\"></span>
+                        On
+                    </a>
+                </div>
+            ";
+        }
+        // line 53
+        echo "        </ul>
     </div>
 </nav>
 ";
@@ -111,7 +147,7 @@ class __TwigTemplate_2b9516bfa996768c5701746d40260ebdf309acbe2016696fbb547fdf3c1
 
     public function getDebugInfo()
     {
-        return array (  47 => 3,  43 => 1,);
+        return array (  126 => 53,  117 => 47,  108 => 41,  105 => 40,  96 => 34,  87 => 28,  81 => 25,  78 => 24,  76 => 23,  68 => 18,  59 => 12,  47 => 3,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -127,40 +163,48 @@ class __TwigTemplate_2b9516bfa996768c5701746d40260ebdf309acbe2016696fbb547fdf3c1
     <div class=\"collapse navbar-collapse justify-content-end text-uppercase\" id=\"navbarSupportedContent\">
         <ul class=\"navbar-nav\">
             <li id=\"home\" class=\"active nav-item\">
-                <a class=\"nav-link\" href=\"/\">
-                    <span class=\"fas fa-home\"></span>
-                    Accueil
+                <a class=\"nav-link\" href=\"{{ path('home') }}\">
+                <span class=\"fas fa-home\"></span>
+                Accueil
                 </a>
             </li>
-        </ul>
-        <ul class=\"navbar-nav\">
-            <li id=\"profile\" class=\"active nav-item\">
-                <a class=\"nav-link\" href=\"/profil\">
-                    <span class=\"fas fa-user\"></span>
-                    Profil
-                </a>
-            </li>
-        </ul>
-        <ul class=\"navbar-nav\">
             <li id=\"tricks\" class=\"active nav-item\">
-                <a class=\"nav-link\" href=\"/tricks\">
+                <a class=\"nav-link\" href=\"{{ path('tricks') }}\">
                     <span class=\"fas fa-user\"></span>
                     Tricks
                 </a>
             </li>
+            {% if app.user %}
+                <li id=\"new-trick\" class=\"active nav-item\">
+                    <a class=\"nav-link\" href=\"{{ path('trick_new') }}\">Nouvelle trick</a>
+                </li>
+                <li id=\"profile\" class=\"active nav-item\">
+                    <a class=\"nav-link\" href=\"{{ path('profile') }}\">
+                        <span class=\"fas fa-user\"></span>
+                        Profil
+                    </a>
+                </li>
+                <div class=\"text-center m-1\">
+                    <a id=\"authentication\" href=\"{{ path('logout') }}\" class=\"btn btn-outline-error\">
+                        <span class=\"fas fa-sign-in-alt\"></span>
+                        Off
+                    </a>
+                </div>
+            {% else %}
+                <div class=\"text-center m-1\">
+                    <a id=\"register\" href=\"{{ path('register') }}\" class=\"btn btn-outline-primary\">
+                        <span class=\"fas fa-file-signature\"></span>
+                        Inscription
+                    </a>
+                </div>
+                <div class=\"text-center m-1\">
+                    <a id=\"authentication\" href=\"{{ path('login') }}\" class=\"btn btn-outline-success\">
+                        <span class=\"fas fa-sign-in-alt\"></span>
+                        On
+                    </a>
+                </div>
+            {% endif %}
         </ul>
-        <div class=\"text-center m-1\">
-            <a id=\"register\" href=\"/inscription\" class=\"btn btn-outline-primary\">
-                <span class=\"fas fa-file-signature\"></span>
-                Inscription
-            </a>
-        </div>
-        <div class=\"text-center m-1\">
-            <a id=\"authentication\" href=\"/login\" class=\"btn btn-outline-success\">
-                <span class=\"fas fa-sign-in-alt\"></span>
-                Connection
-            </a>
-        </div>
     </div>
 </nav>
 ", "partial/_nav.html.twig", "C:\\wamp64\\www\\snowtricks\\templates\\partial\\_nav.html.twig");

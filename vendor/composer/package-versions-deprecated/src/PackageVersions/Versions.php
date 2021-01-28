@@ -120,10 +120,10 @@ final class Versions
   'phpstan/phpstan' => '0.12.70@07f0ef37f5f876e8cee44cc8ea0ec3fe80d499ee',
   'roave/security-advisories' => 'dev-master@db043e108edc5065662fec040aedea5bf30f8a12',
   'symfony/maker-bundle' => 'v1.28.0@6f4d27a68c92179c124f5331a27e32d197c9bd59',
-  'symfony/polyfill-ctype' => '*@eab02251565236560b7d819b985478a9b25ca75f',
-  'symfony/polyfill-iconv' => '*@eab02251565236560b7d819b985478a9b25ca75f',
-  'symfony/polyfill-php72' => '*@eab02251565236560b7d819b985478a9b25ca75f',
-  '__root__' => 'dev-develop@eab02251565236560b7d819b985478a9b25ca75f',
+  'symfony/polyfill-ctype' => '*@f2cfa3af905f77d6f98c1d598eb9e4cbf93b2975',
+  'symfony/polyfill-iconv' => '*@f2cfa3af905f77d6f98c1d598eb9e4cbf93b2975',
+  'symfony/polyfill-php72' => '*@f2cfa3af905f77d6f98c1d598eb9e4cbf93b2975',
+  '__root__' => 'dev-develop@f2cfa3af905f77d6f98c1d598eb9e4cbf93b2975',
 );
 
     private function __construct()

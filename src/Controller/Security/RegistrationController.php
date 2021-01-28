@@ -91,7 +91,7 @@ class RegistrationController extends AbstractController
      *
      * @return RedirectResponse
      */
-    public function activation($token, UserRepository $userRepository): RedirectResponse
+    public function activation($token, UserRepository $userRepository)
     {
         $user = $userRepository->findOneBy(['activation_token' => $token]);
 

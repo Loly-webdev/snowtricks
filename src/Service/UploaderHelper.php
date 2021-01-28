@@ -33,12 +33,12 @@ class UploaderHelper
      */
     public function uploadPicture(UploadedFile $uploadedFile, $folder): string
     {
-        $destination = $this->uploadsPath.'/'.$folder;
+        $load = $this->uploadsPath.'/'.$folder;
         $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
         $newFilename = $originalFilename . '-' . uniqid('', true) . '.' . $uploadedFile->guessExtension();
 
         $uploadedFile->move(
-            $destination,
+            $load,
             $newFilename
         );
 
