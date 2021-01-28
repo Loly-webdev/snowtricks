@@ -2,156 +2,96 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use RuntimeException;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * User
- *
- * @ORM\Table(name="user", uniqueConstraints={
- *     @ORM\UniqueConstraint(name="UNIQ_8D93D649AA08CB10", columns={"login"}),
- *     @ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"email"})
- * })
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(
+ * fields={"username"},
+ * message="Ce pseudo est déjà utilisé."
+ * )
+ * @UniqueEntity(
+ *  fields={"email"},
+ *  message="Cet email est déjà utilisé"
+ * )
  */
-class User implements \Symfony\Component\Security\Core\User\UserInterface
+class User implements UserInterface
 {
     /**
-     *
-     */
-    public const ROLE_ADMIN       = 'admin';
-    /**
-     *
-     */
-    public const ROLE_USER        = 'user';
-    /**
-     *
-     */
-    public const ROLE_ADMIN_LABEL = 'Administrateur';
-    /**
-     *
-     */
-    public const ROLE_USER_LABEL = 'Utilisateur';
-    /**
-     *
-     */
-    public const ROLES = [
-        self::ROLE_ADMIN => self::ROLE_ADMIN_LABEL,
-        self::ROLE_USER  => self::ROLE_USER_LABEL
-    ];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=180, nullable=false)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=2, max=50,
+     * minMessage="Votre pseudo doit contenir au moins 2 caractères.",
+     * maxMessage="Votre pseudo doit contenir moins de 50 caractères.")
      */
-    private $email;
+    private $username;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="roles", type="string", nullable=false)
-     */
-    private $roles;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=5,
+     * minMessage="Votre mot de passe doit contenir au moins 5 caractères.")
      */
     private $password;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="login", type="string", length=30, nullable=false)
+     * @Assert\Length(min=5,
+     * minMessage="Votre mot de passe doit contenir au moins 5 caractères.")
+     * @Assert\EqualTo(propertyPath="password",
+     * message="Les mots de passe saisies sont différents")
      */
-    private $login;
+    private $passwordVerification;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="avatar", type="string", length=100, nullable=false)
+     * @ORM\Column(type="datetime")
      */
-    private $avatar;
+    private $created_at;
 
     /**
-     * @var DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message="Cette adresse email n'est pas valide.")
      */
-    private $createdAt;
+    private $email;
 
     /**
-     * @var DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $updatedAt;
+    private $profile_picture;
 
     /**
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="userId")
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $categories;
+    private $activation_token;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tricks", mappedBy="userId")
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $tricks;
+    private $reset_token;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="userId")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", orphanRemoval=true)
      */
     private $comments;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Picture", mappedBy="userId")
-     */
-    private $pictures;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Video", mappedBy="userId")
-     */
-    private $videos;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_verified", type="boolean", nullable=false)
-     */
-    private $isVerified = false;
-
-    /**
-     * @var string
-     */
-    private $salt;
 
     /**
      * User constructor.
      */
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
-        $this->tricks     = new ArrayCollection();
+        $this->created_at = new DateTime();
         $this->comments   = new ArrayCollection();
-        $this->pictures   = new ArrayCollection();
-        $this->videos     = new ArrayCollection();
     }
 
     /**
@@ -165,73 +105,19 @@ class User implements \Symfony\Component\Security\Core\User\UserInterface
     /**
      * @return string|null
      */
-    public function getEmail(): ?string
+    public function getUsername(): ?string
     {
-        return $this->email;
+        return $this->username;
     }
 
     /**
-     * @param string $email
+     * @param string $username
      *
      * @return $this
      */
-    public function setEmail(string $email): self
+    public function setUsername(string $username): self
     {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRoleLabel(): string
-    {
-        $role = $this->role();
-
-        return static::ROLES[$role] ?? 'Aucun role définit';
-    }
-
-    /**
-     * @return string
-     */
-    public function role(): string
-    {
-        if ($this->isAdmin()) {
-            return static::ROLE_ADMIN;
-        }
-        return static::ROLE_USER;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAdmin(): bool
-    {
-        return static::ROLE_ADMIN === $this->getRole();
-    }
-
-    /**
-     * @return string
-     */
-    public function getRole(): string
-    {
-        return $this->roles;
-    }
-
-    /**
-     * @param string $roles
-     *
-     * @return User
-     * @throws RuntimeException
-     */
-    public function setRole(string $roles): User
-    {
-        $existingRole = [static::ROLE_ADMIN, static::ROLE_USER];
-        if (!in_array($roles, $existingRole)) {
-            throw new RuntimeException('Le rôle ' . $roles . ' saisie n\'existe pas ou n\'est pas valide');
-        }
-        $this->roles = $roles;
+        $this->username = $username;
 
         return $this;
     }
@@ -258,70 +144,30 @@ class User implements \Symfony\Component\Security\Core\User\UserInterface
 
     /**
      * @return string|null
-     * @see UserInterface
      */
-    public function getSalt(): ?string
+    public function getPasswordVerification(): ?string
     {
-        return $this->salt;
+        return $this->passwordVerification;
     }
 
     /**
-     * @return void
-     * @see UserInterface
-     */
-    public function eraseCredentials(): void
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getLogin(): ?string
-    {
-        return $this->login;
-    }
-
-    /**
-     * @param string $login
+     * @param string $passwordVerification
      *
      * @return $this
      */
-    public function setLogin(string $login): self
+    public function setPasswordVerification(string $passwordVerification): self
     {
-        $this->login = $login;
+        $this->passwordVerification = $passwordVerification;
 
         return $this;
     }
 
     /**
-     * A visual identifier that represents this user.
-     * @see UserInterface
+     * @return string[]
      */
-    public function getUsername(): string
+    public function getRoles(): array
     {
-        return $this->login;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getAvatar(): ?string
-    {
-        return $this->avatar;
-    }
-
-    /**
-     * @param string $avatar
-     *
-     * @return $this
-     */
-    public function setAvatar(string $avatar): self
-    {
-        $this->avatar = $avatar;
-
-        return $this;
+        return ['ROLE_USER'];
     }
 
     /**
@@ -329,121 +175,116 @@ class User implements \Symfony\Component\Security\Core\User\UserInterface
      */
     public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
     /**
-     * @param DateTimeInterface $createdAt
+     * @param DateTimeInterface $created_at
      *
      * @return $this
      */
-    public function setCreatedAt(DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
-        $this->createdAt = $createdAt;
+        $this->created_at = $created_at;
 
         return $this;
     }
 
     /**
-     * @return DateTimeInterface|null
+     * @return string|null
      */
-    public function getUpdatedAt(): ?DateTimeInterface
+    public function getEmail(): ?string
     {
-        return $this->updatedAt;
+        return $this->email;
     }
 
     /**
-     * @param DateTimeInterface $updatedAt
+     * @param string $email
      *
      * @return $this
      */
-    public function setUpdatedAt(DateTimeInterface $updatedAt): self
+    public function setEmail(string $email): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * @return Collection|Category[]
+     * @return string|null
      */
-    public function getCategories(): Collection
+    public function getProfilePicture(): ?string
     {
-        return $this->categories;
+        return $this->profile_picture;
     }
 
     /**
-     * @param Category $category
+     * @param string|null $profile_picture
      *
      * @return $this
      */
-    public function addCategory(Category $category): self
+    public function setProfilePicture(?string $profile_picture): self
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-            $category->setUserId($this);
-        }
+        $this->profile_picture = $profile_picture;
 
         return $this;
     }
 
     /**
-     * @param Category $category
+     * @return void
+     */
+    public function eraseCredentials(): void
+    {
+
+    }
+
+    /**
+     * @return string|void|null
+     */
+    public function getSalt(): void
+    {
+
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getActivationToken(): ?string
+    {
+        return $this->activation_token;
+    }
+
+    /**
+     * @param string|null $activation_token
      *
      * @return $this
      */
-    public function removeCategory(Category $category): self
+    public function setActivationToken(?string $activation_token): self
     {
-        if ($this->categories->removeElement($category)) {
-            // set the owning side to null (unless already changed)
-            if ($category->getUserId() === $this) {
-                $category->setUserId(null);
-            }
-        }
+        $this->activation_token = $activation_token;
 
         return $this;
     }
 
     /**
-     * @return Collection|Tricks[]
+     * @return string|null
      */
-    public function getTricks(): Collection
+    public function getResetToken(): ?string
     {
-        return $this->tricks;
+        return $this->reset_token;
     }
 
     /**
-     * @param Tricks $trick
+     * @param string|null $reset_token
      *
      * @return $this
      */
-    public function addTrick(Tricks $trick): self
+    public function setResetToken(?string $reset_token): self
     {
-        if (!$this->tricks->contains($trick)) {
-            $this->tricks[] = $trick;
-            $trick->setUserId($this);
-        }
+        $this->reset_token = $reset_token;
 
         return $this;
     }
-
-    /**
-     * @param Tricks $trick
-     *
-     * @return $this
-     */
-    public function removeTrick(Tricks $trick): self
-    {
-        if ($this->tricks->removeElement($trick)) {
-            // set the owning side to null (unless already changed)
-            if ($trick->getUserId() === $this) {
-                $trick->setUserId(null);
-            }
-        }
-
-        return $this;
-    }
-
 
     /**
      * @return Collection|Comment[]
@@ -462,7 +303,7 @@ class User implements \Symfony\Component\Security\Core\User\UserInterface
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
-            $comment->setUserId($this);
+            $comment->setUser($this);
         }
 
         return $this;
@@ -475,132 +316,13 @@ class User implements \Symfony\Component\Security\Core\User\UserInterface
      */
     public function removeComment(Comment $comment): self
     {
-        if ($this->comments->removeElement($comment)) {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
             // set the owning side to null (unless already changed)
-            if ($comment->getUserId() === $this) {
-                $comment->setUserId(null);
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Picture[]
-     */
-    public function getPictures(): Collection
-    {
-        return $this->pictures;
-    }
-
-    /**
-     * @param Picture $picture
-     *
-     * @return $this
-     */
-    public function addPicture(Picture $picture): self
-    {
-        if (!$this->pictures->contains($picture)) {
-            $this->pictures[] = $picture;
-            $picture->setUserId($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Picture $picture
-     *
-     * @return $this
-     */
-    public function removePicture(Picture $picture): self
-    {
-        if ($this->pictures->removeElement($picture)) {
-            // set the owning side to null (unless already changed)
-            if ($picture->getUserId() === $this) {
-                $picture->setUserId(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Video[]
-     */
-    public function getVideos(): Collection
-    {
-        return $this->videos;
-    }
-
-    /**
-     * @param Video $video
-     *
-     * @return $this
-     */
-    public function addVideo(Video $video): self
-    {
-        if (!$this->videos->contains($video)) {
-            $this->videos[] = $video;
-            $video->setUserId($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Video $video
-     *
-     * @return $this
-     */
-    public function removeVideo(Video $video): self
-    {
-        if ($this->videos->removeElement($video)) {
-            // set the owning side to null (unless already changed)
-            if ($video->getUserId() === $this) {
-                $video->setUserId(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return bool|null
-     */
-    public function getIsVerified(): ?bool
-    {
-        return $this->isVerified;
-    }
-
-    /**
-     * @param bool $isVerified
-     *
-     * @return $this
-     */
-    public function setIsVerified(bool $isVerified): self
-    {
-        $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getRoles(): ?string
-    {
-        return $this->roles;
-    }
-
-    /**
-     * @param string $roles
-     *
-     * @return $this
-     */
-    public function setRoles(string $roles): self
-    {
-        $this->roles = $roles;
 
         return $this;
     }
