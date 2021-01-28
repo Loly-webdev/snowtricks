@@ -3,93 +3,142 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use RuntimeException;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * User
+ *
+ * @ORM\Table(name="user", uniqueConstraints={
+ *     @ORM\UniqueConstraint(name="UNIQ_8D93D649AA08CB10", columns={"login"}),
+ *     @ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"email"})
+ * })
+ * @ORM\Entity
  */
-class User implements UserInterface
+class User implements \Symfony\Component\Security\Core\User\UserInterface
 {
     /**
+     *
+     */
+    public const ROLE_ADMIN       = 'admin';
+    /**
+     *
+     */
+    public const ROLE_USER        = 'user';
+    /**
+     *
+     */
+    public const ROLE_ADMIN_LABEL = 'Administrateur';
+    /**
+     *
+     */
+    public const ROLE_USER_LABEL = 'Utilisateur';
+    /**
+     *
+     */
+    public const ROLES = [
+        self::ROLE_ADMIN => self::ROLE_ADMIN_LABEL,
+        self::ROLE_USER  => self::ROLE_USER_LABEL
+    ];
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=180, nullable=false)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * @var string
+     *
+     * @ORM\Column(name="roles", type="string", nullable=false)
      */
-    private $roles = [];
+    private $roles;
 
     /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=30, unique=true)
+     * @var string
+     *
+     * @ORM\Column(name="login", type="string", length=30, nullable=false)
      */
     private $login;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @var string
+     *
+     * @ORM\Column(name="avatar", type="string", length=100, nullable=false)
      */
     private $avatar;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
-    private $created_at;
+    private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Category::class, mappedBy="userId")
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="userId")
      */
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity=Tricks::class, mappedBy="userId")
+     * @ORM\OneToMany(targetEntity="Tricks", mappedBy="userId")
      */
     private $tricks;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="userId")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="userId")
      */
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="userId")
+     * @ORM\OneToMany(targetEntity="Picture", mappedBy="userId")
      */
     private $pictures;
 
     /**
-     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="userId")
+     * @ORM\OneToMany(targetEntity="Video", mappedBy="userId")
      */
     private $videos;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @var bool
+     *
+     * @ORM\Column(name="is_verified", type="boolean", nullable=false)
      */
     private $isVerified = false;
+
     /**
-     *
+     * @var string
      */
     private $salt;
 
@@ -134,44 +183,65 @@ class User implements UserInterface
     }
 
     /**
-     * A visual identifier that represents this user.
-     * @see UserInterface
+     * @return string
      */
-    public function getUsername(): string
+    public function getRoleLabel(): string
     {
-        return (string)$this->email;
+        $role = $this->role();
+
+        return static::ROLES[$role] ?? 'Aucun role définit';
     }
 
     /**
-     * @see UserInterface
+     * @return string
      */
-    public function getRoles(): array
+    public function role(): string
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        if ($this->isAdmin()) {
+            return static::ROLE_ADMIN;
+        }
+        return static::ROLE_USER;
     }
 
     /**
-     * @param array $roles
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return static::ROLE_ADMIN === $this->getRole();
+    }
+
+    /**
+     * @return string
+     */
+    public function getRole(): string
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param string $roles
      *
-     * @return $this
+     * @return User
+     * @throws RuntimeException
      */
-    public function setRoles(array $roles): self
+    public function setRole(string $roles): User
     {
+        $existingRole = [static::ROLE_ADMIN, static::ROLE_USER];
+        if (!in_array($roles, $existingRole)) {
+            throw new RuntimeException('Le rôle ' . $roles . ' saisie n\'existe pas ou n\'est pas valide');
+        }
         $this->roles = $roles;
 
         return $this;
     }
 
     /**
-     * @see UserInterface
+     * @return string|null
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
-        return (string)$this->password;
+        return $this->password;
     }
 
     /**
@@ -226,6 +296,15 @@ class User implements UserInterface
     }
 
     /**
+     * A visual identifier that represents this user.
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return $this->login;
+    }
+
+    /**
      * @return string|null
      */
     public function getAvatar(): ?string
@@ -250,17 +329,17 @@ class User implements UserInterface
      */
     public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
-     * @param DateTimeInterface $created_at
+     * @param DateTimeInterface $createdAt
      *
      * @return $this
      */
-    public function setCreatedAt(DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -270,17 +349,17 @@ class User implements UserInterface
      */
     public function getUpdatedAt(): ?DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
-     * @param DateTimeInterface $updated_at
+     * @param DateTimeInterface $updatedAt
      *
      * @return $this
      */
-    public function setUpdatedAt(DateTimeInterface $updated_at): self
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -487,9 +566,9 @@ class User implements UserInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isVerified(): bool
+    public function getIsVerified(): ?bool
     {
         return $this->isVerified;
     }
@@ -502,6 +581,26 @@ class User implements UserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRoles(): ?string
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param string $roles
+     *
+     * @return $this
+     */
+    public function setRoles(string $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }

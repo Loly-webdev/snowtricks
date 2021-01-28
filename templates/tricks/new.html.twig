@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <h1>Create new Tricks</h1>
+
+    {{ include('tricks/_form.html.twig') }}
+
+    <a href="{{ path('app_tricks') }}">back to list</a>
+{% endblock %}
