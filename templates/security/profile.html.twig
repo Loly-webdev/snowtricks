@@ -1,20 +1,40 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig'%}
 {% block content %}
     <section class="default">
         <div class="default-title">
             <h2>Mon compte</h2>
         </div>
         <figure class="default-img">
-            <img src="{{ asset('uploads/profilePictures/' ~ user.profilePicture) }}" alt="picture_profile">
+            {% if user %}
+                <img src="{{ user.profile_picture }}" alt="picture-profile">
+            {% else %}
+                <img src="uploads/profilePictures/profile-picture-default.png" alt="picture-profile">
+            {% endif %}
         </figure>
-        <div class="default-form">
-            {{ form_start(form) }}
-            {{ form_row(form.username) }}
-            {{ form_row(form.email) }}
-            {{ form_row(form.profile_picture) }}
-            <a href="{{ path('update_password') }}">Modifier mon mot de passe ?</a>
-            <input type="submit" class="btn" value="Valider">
-            {{ form_end(form) }}
+        <h3 class="mb-5 text-uppercase">
+            <span class="far fa-address-card"></span>
+            Mon profil :
+        </h3>
+        <div class="container mb-5">
+            <div class="mb-5 p-4 rounded bg-blue shadow">
+                <p class="h3 p-2 my-2 mx-auto text-info font-weight-bold">
+                    Salutation {{ user.username }} !
+                </p>
+                <div class="h5 px-2 py-4 mt-3 text-secondary bg-light text-dark rounded">
+                    <div class="form-group">
+                        <span class="font-weight-bold">Date de création du compte : </span>{{ user.createdAt|date("m/d/Y") }}
+                    </div>
+                    <div class="form-group">
+                        <span class="font-weight-bold">mon adresse mail : </span>{{ user.email }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-3 mt-4 mb-5 mx-auto w-50 border-top border-bottom border-info">
+            <a href="/home" class="m-2 p-2 btn btn-primary">
+                <span class="fas fa-angle-double-left"></span>
+                Retour à l'accueil
+            </a>
         </div>
     </section>
 {% endblock %}

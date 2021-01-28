@@ -15,7 +15,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class AuthenticatorController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/connexion", name="login")
      * @param AuthenticationUtils $authenticationUtils
      *
      * @return Response
@@ -33,13 +33,13 @@ class AuthenticatorController extends AbstractController
 
         return $this->render('security/login.html.twig', [
             'controller_name' => 'AccountController',
-            'last_username' => $lastUsername,
+            'lastUsername' => $lastUsername,
             'error' => $error
         ]);
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/deconnexion", name="logout")
      */
     public function logout(): void
     {
