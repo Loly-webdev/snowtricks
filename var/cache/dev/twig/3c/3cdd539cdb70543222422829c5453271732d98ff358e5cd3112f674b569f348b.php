@@ -117,7 +117,7 @@ class __TwigTemplate_2b9516bfa996768c5701746d40260ebdf309acbe2016696fbb547fdf3c1
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("login");
             echo "\" class=\"btn btn-outline-success\">
                         <span class=\"fas fa-sign-in-alt\"></span>
-                        On
+                        Connexion
                     </a>
                 </div>
             ";
@@ -200,7 +200,7 @@ class __TwigTemplate_2b9516bfa996768c5701746d40260ebdf309acbe2016696fbb547fdf3c1
                 <div class=\"text-center m-1\">
                     <a id=\"authentication\" href=\"{{ path('login') }}\" class=\"btn btn-outline-success\">
                         <span class=\"fas fa-sign-in-alt\"></span>
-                        On
+                        Connexion
                     </a>
                 </div>
             {% endif %}

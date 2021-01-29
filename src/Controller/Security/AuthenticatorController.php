@@ -33,7 +33,7 @@ class AuthenticatorController extends AbstractController
 
         return $this->render('security/login.html.twig', [
             'controller_name' => 'AccountController',
-            'lastUsername' => $lastUsername,
+            'last_username' => $lastUsername,
             'error' => $error
         ]);
     }

@@ -24,13 +24,12 @@ class RegistrationType extends ApplicationType
     {
         $builder
             ->add('username', TextType::class, $this->fieldsConfiguration('Veuillez saisir un pseudo.'))
-            ->add('email', EmailType::class, $this->fieldsConfiguration('Veuillez saisir une adresse email.' ))
+            ->add('email', EmailType::class, $this->fieldsConfiguration('Veuillez saisir une adresse email.'))
             ->add('password', PasswordType::class, $this->fieldsConfiguration('Veuillez saisir un mot de passe.'))
             ->add('passwordVerification', PasswordType::class, $this->fieldsConfiguration('Veuillez confirmer votre mot de passe.'))
             ->add('profile_picture', FileType::class, [
                 'required' => false,
-            ] )
-        ;
+            ]);
     }
 
     /**
@@ -39,7 +38,7 @@ class RegistrationType extends ApplicationType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-                                   'data_class' => User::class,
+                                   'data_class'         => User::class,
                                    'translation_domain' => 'account-form'
                                ]);
     }

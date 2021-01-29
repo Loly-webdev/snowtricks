@@ -24,17 +24,16 @@ class ProfileType extends ApplicationType
     {
         $builder
             ->add('username', TextType::class, $this->fieldsConfiguration('Veuillez saisir un pseudo.'))
-            ->add('email', EmailType::class, $this->fieldsConfiguration('Veuillez saisir une adresse email.' ))
+            ->add('email', EmailType::class, $this->fieldsConfiguration('Veuillez saisir une adresse email.'))
             ->add('profile_picture', FileType::class, [
                 'constraints' => [
                     new Image([
                                   'maxSize' => '2M'
                               ])
                 ],
-                'mapped' => false,
-                'required' => false,
-            ] )
-        ;
+                'mapped'      => false,
+                'required'    => false,
+            ]);
     }
 
     /**
@@ -43,7 +42,7 @@ class ProfileType extends ApplicationType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-                                   'data_class' => User::class,
+                                   'data_class'         => User::class,
                                    'translation_domain' => 'profile-form'
                                ]);
     }

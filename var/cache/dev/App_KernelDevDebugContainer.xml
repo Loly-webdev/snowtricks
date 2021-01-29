@@ -295,14 +295,14 @@
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.5nX7ca3.App\Controller\MainController"/>
+        <argument type="service" id=".service_locator.wod53is.App\Controller\MainController"/>
       </call>
     </service>
     <service id="App\Controller\Security\AuthenticatorController" class="App\Controller\Security\AuthenticatorController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.5nX7ca3.App\Controller\Security\AuthenticatorController"/>
+        <argument type="service" id=".service_locator.wod53is.App\Controller\Security\AuthenticatorController"/>
       </call>
     </service>
     <service id="App\Controller\Security\RegistrationController" class="App\Controller\Security\RegistrationController" public="true" autowire="true" autoconfigure="true">
@@ -312,7 +312,7 @@
       <argument type="service" id="security.user_password_encoder.generic"/>
       <argument type="service" id="security.csrf.token_generator"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.5nX7ca3.App\Controller\Security\RegistrationController"/>
+        <argument type="service" id=".service_locator.wod53is.App\Controller\Security\RegistrationController"/>
       </call>
     </service>
     <service id="App\Controller\Security\ResetPasswordController" class="App\Controller\Security\ResetPasswordController" public="true" autowire="true" autoconfigure="true">
@@ -322,7 +322,7 @@
       <argument type="service" id="security.user_password_encoder.generic"/>
       <argument type="service" id="security.csrf.token_generator"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.5nX7ca3.App\Controller\Security\ResetPasswordController"/>
+        <argument type="service" id=".service_locator.wod53is.App\Controller\Security\ResetPasswordController"/>
       </call>
     </service>
     <service id="App\Controller\Security\UserController" class="App\Controller\Security\UserController" public="true" autowire="true" autoconfigure="true">
@@ -331,7 +331,7 @@
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="security.csrf.token_generator"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.5nX7ca3.App\Controller\Security\UserController"/>
+        <argument type="service" id=".service_locator.wod53is.App\Controller\Security\UserController"/>
       </call>
     </service>
     <service id="App\Controller\TrickController" class="App\Controller\TrickController" public="true" autowire="true" autoconfigure="true">
@@ -339,7 +339,7 @@
       <tag name="container.service_subscriber"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.5nX7ca3.App\Controller\TrickController"/>
+        <argument type="service" id=".service_locator.wod53is.App\Controller\TrickController"/>
       </call>
     </service>
     <service id="App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true">
@@ -403,7 +403,9 @@
     <service id="App\Service\Paginator" class="App\Service\Paginator" autowire="true" autoconfigure="true">
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
-    <service id="App\Service\UploaderHelper" class="App\Service\UploaderHelper" autowire="true" autoconfigure="true"/>
+    <service id="App\Service\UploaderHelper" class="App\Service\UploaderHelper" autowire="true" autoconfigure="true">
+      <argument>C:\wamp64\www\snowtricks/public/uploads</argument>
+    </service>
     <service id="App\Service\UserChecker" class="App\Service\UserChecker" autowire="true" autoconfigure="true"/>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
@@ -4529,7 +4531,7 @@
       <argument type="collection"/>
     </service>
     <service id="logger" class="Symfony\Component\HttpKernel\Log\Logger"/>
-    <service id=".service_locator.5nX7ca3" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.wod53is" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="doctrine" type="service" id="doctrine" on-invalid="ignore"/>
@@ -4545,41 +4547,41 @@
         <argument key="twig" type="service" id="twig" on-invalid="ignore"/>
       </argument>
     </service>
-    <service id=".service_locator.5nX7ca3.App\Controller\MainController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.wod53is.App\Controller\MainController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\MainController"/>
       <argument>App\Controller\MainController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.5nX7ca3" method="withContext"/>
+      <factory service=".service_locator.wod53is" method="withContext"/>
     </service>
-    <service id=".service_locator.5nX7ca3.App\Controller\Security\AuthenticatorController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.wod53is.App\Controller\Security\AuthenticatorController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\Security\AuthenticatorController"/>
       <argument>App\Controller\Security\AuthenticatorController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.5nX7ca3" method="withContext"/>
+      <factory service=".service_locator.wod53is" method="withContext"/>
     </service>
-    <service id=".service_locator.5nX7ca3.App\Controller\Security\RegistrationController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.wod53is.App\Controller\Security\RegistrationController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\Security\RegistrationController"/>
       <argument>App\Controller\Security\RegistrationController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.5nX7ca3" method="withContext"/>
+      <factory service=".service_locator.wod53is" method="withContext"/>
     </service>
-    <service id=".service_locator.5nX7ca3.App\Controller\Security\ResetPasswordController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.wod53is.App\Controller\Security\ResetPasswordController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\Security\ResetPasswordController"/>
       <argument>App\Controller\Security\ResetPasswordController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.5nX7ca3" method="withContext"/>
+      <factory service=".service_locator.wod53is" method="withContext"/>
     </service>
-    <service id=".service_locator.5nX7ca3.App\Controller\Security\UserController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.wod53is.App\Controller\Security\UserController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\Security\UserController"/>
       <argument>App\Controller\Security\UserController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.5nX7ca3" method="withContext"/>
+      <factory service=".service_locator.wod53is" method="withContext"/>
     </service>
-    <service id=".service_locator.5nX7ca3.App\Controller\TrickController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.wod53is.App\Controller\TrickController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\TrickController"/>
       <argument>App\Controller\TrickController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.5nX7ca3" method="withContext"/>
+      <factory service=".service_locator.wod53is" method="withContext"/>
     </service>
     <service id=".service_locator.WOytlHA" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -5092,6 +5094,7 @@
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
     <service id=".service_locator.XDGmiR3" alias=".1_ServiceLocator~ap_AmVV"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.anofQPJ"/>
+    <service id=".service_locator.F2gtyL8" alias=".service_locator.wod53is"/>
     <service id="validator" alias="debug.validator" public="true"/>
     <service id="event_dispatcher" alias="debug.event_dispatcher" public="true"/>
     <service id="controller_resolver" alias="debug.controller_resolver"/>

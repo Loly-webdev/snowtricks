@@ -19,8 +19,7 @@ class ForgottenPasswordType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class, $this->fieldsConfiguration('Veuillez saisir une adresse email.' ))
-        ;
+            ->add('email', EmailType::class, $this->fieldsConfiguration('Veuillez saisir une adresse email.'));
     }
 
     /**

@@ -37,20 +37,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * Profile Action
-     *
-     * @Route("/profil", name="user")
-     */
-    public function index(): Response
-    {
-        return $this->render('security/profile.html.twig', [
-            'controller_name' => 'UserController',
-            'user' => $this->getUser()
-        ]);
-    }
-
-    /**
-     * @Route("/profile-edit", name="profile")
+     * @Route("/mon-compte", name="profile")
      * @IsGranted("ROLE_USER")
      * @param Request        $request
      * @param UploaderHelper $uploaderHelper

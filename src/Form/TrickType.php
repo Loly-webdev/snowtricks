@@ -3,9 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Trick;
-use App\Form\VideoType;
 use App\Entity\Category;
-use App\Form\PictureType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,27 +29,26 @@ class TrickType extends ApplicationType
             ->add('description', TextareaType::class, $this->fieldsConfiguration('Veuillez saisir un descriptif de la figure.')
             )
             ->add('category', EntityType::class, [
-                'class' => Category::class,
+                'class'        => Category::class,
                 'choice_label' => 'name'
             ])
             ->add('pictures', CollectionType::class, [
-                'entry_type' => PictureType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
+                'entry_type'        => PictureType::class,
+                'allow_add'         => true,
+                'allow_delete'      => true,
                 'allow_file_upload' => true,
-                'required' => false,
-                'entry_options' => ['label' => false],
-                'by_reference' => false
+                'required'          => false,
+                'entry_options'     => ['label' => false],
+                'by_reference'      => false
             ])
             ->add('videos', CollectionType::class, [
-                'entry_type' => VideoType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'required' => false,
-                'by_reference' => false,
+                'entry_type'    => VideoType::class,
+                'allow_add'     => true,
+                'allow_delete'  => true,
+                'required'      => false,
+                'by_reference'  => false,
                 'entry_options' => ['label' => false],
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -60,7 +57,7 @@ class TrickType extends ApplicationType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-                                   'data_class' => Trick::class,
+                                   'data_class'         => Trick::class,
                                    'translation_domain' => 'trick-form'
                                ]);
     }

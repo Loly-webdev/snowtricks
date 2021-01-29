@@ -20,8 +20,7 @@ class ResetPasswordType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('password', PasswordType::class, $this->fieldsConfiguration('Veuillez saisir un mot de passe.'))
-        ;
+            ->add('password', PasswordType::class, $this->fieldsConfiguration('Veuillez saisir un mot de passe.'));
     }
 
     /**
@@ -30,7 +29,7 @@ class ResetPasswordType extends ApplicationType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-                                   'data_class' => User::class,
+                                   'data_class'         => User::class,
                                    'translation_domain' => 'account-form'
                                ]);
     }

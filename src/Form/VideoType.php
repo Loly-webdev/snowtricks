@@ -21,9 +21,8 @@ class VideoType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class,  $this->fieldsConfiguration("Veuillez saisir un titre."))
-            ->add('url', UrlType::class, $this->fieldsConfiguration("Veuillez saisir l'adresse url de la vidéo."))
-        ;
+            ->add('name', TextType::class, $this->fieldsConfiguration("Veuillez saisir un titre."))
+            ->add('url', UrlType::class, $this->fieldsConfiguration("Veuillez saisir l'adresse url de la vidéo."));
     }
 
     /**
@@ -32,7 +31,7 @@ class VideoType extends ApplicationType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-                                   'data_class' => Video::class,
+                                   'data_class'         => Video::class,
                                    'translation_domain' => 'video-form'
                                ]);
     }

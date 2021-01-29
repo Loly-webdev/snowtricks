@@ -66,10 +66,10 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'username', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'passwordVerification', '' . "\0" . 'App\\Entity\\User' . "\0" . 'created_at', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'profile_picture', '' . "\0" . 'App\\Entity\\User' . "\0" . 'activation_token', '' . "\0" . 'App\\Entity\\User' . "\0" . 'reset_token', '' . "\0" . 'App\\Entity\\User' . "\0" . 'comments'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'username', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'passwordVerification', '' . "\0" . 'App\\Entity\\User' . "\0" . 'created_at', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'profile_picture', '' . "\0" . 'App\\Entity\\User' . "\0" . 'activation_token', '' . "\0" . 'App\\Entity\\User' . "\0" . 'reset_token', '' . "\0" . 'App\\Entity\\User' . "\0" . 'comments', '' . "\0" . 'App\\Entity\\User' . "\0" . 'salt'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'username', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'passwordVerification', '' . "\0" . 'App\\Entity\\User' . "\0" . 'created_at', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'profile_picture', '' . "\0" . 'App\\Entity\\User' . "\0" . 'activation_token', '' . "\0" . 'App\\Entity\\User' . "\0" . 'reset_token', '' . "\0" . 'App\\Entity\\User' . "\0" . 'comments'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'username', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'passwordVerification', '' . "\0" . 'App\\Entity\\User' . "\0" . 'created_at', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'profile_picture', '' . "\0" . 'App\\Entity\\User' . "\0" . 'activation_token', '' . "\0" . 'App\\Entity\\User' . "\0" . 'reset_token', '' . "\0" . 'App\\Entity\\User' . "\0" . 'comments', '' . "\0" . 'App\\Entity\\User' . "\0" . 'salt'];
     }
 
     /**
@@ -348,12 +348,12 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getSalt(): void
+    public function getSalt(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSalt', []);
 
-        parent::getSalt();
+        return parent::getSalt();
     }
 
     /**
