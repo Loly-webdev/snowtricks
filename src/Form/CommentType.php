@@ -22,8 +22,7 @@ class CommentType extends ApplicationType
         $builder
             ->add('content', TextareaType::class, $this->fieldsConfiguration('Veuillez saisir votre commentaire.'), [
                 'label' => false
-            ])
-        ;
+            ]);
     }
 
     /**

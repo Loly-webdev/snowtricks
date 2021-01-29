@@ -23,9 +23,8 @@ class PictureType extends ApplicationType
         $builder
             ->add('file', FileType::class,
                   [
-                      'required' => false ])
-            ->add('caption', TextType::class, $this->fieldsConfiguration("Veuillez saisir un titre."))
-        ;
+                      'required' => false])
+            ->add('caption', TextType::class, $this->fieldsConfiguration("Veuillez saisir un titre."));
     }
 
     /**
@@ -34,7 +33,7 @@ class PictureType extends ApplicationType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-                                   'data_class' => Picture::class,
+                                   'data_class'         => Picture::class,
                                    'translation_domain' => 'picture-form'
                                ]);
     }

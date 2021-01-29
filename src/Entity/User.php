@@ -85,6 +85,8 @@ class User implements UserInterface
      */
     private $comments;
 
+    private $salt;
+
     /**
      * User constructor.
      */
@@ -239,11 +241,11 @@ class User implements UserInterface
     }
 
     /**
-     * @return string|void|null
+     * @return string|null
      */
-    public function getSalt(): void
+    public function getSalt(): ?string
     {
-
+        return $this->salt;
     }
 
     /**
