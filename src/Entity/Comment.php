@@ -2,77 +2,51 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentRepository;
 use DateTime;
 use DateTimeInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Comment
- *
- * @ORM\Table(name="comment", indexes={@ORM\Index(name="IDX_9474526CA674A03E", columns={"tricks_id_id"}), @ORM\Index(name="IDX_9474526C9D86650F", columns={"user_id_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  */
 class Comment
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="author", type="string", length=30, nullable=false)
-     */
-    private $author;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="content", type="text", length=0, nullable=false)
+     * @ORM\Column(type="text")
      */
     private $content;
 
     /**
-     * @var DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private $created_at;
 
     /**
-     * @var DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $updatedAt;
+    private $user;
 
     /**
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id_id", referencedColumnName="id", nullable=false)
-     * })
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $userId;
+    private $trick;
 
     /**
-     * @var Tricks
-     *
-     * @ORM\ManyToOne(targetEntity="Tricks")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tricks_id_id", referencedColumnName="id", nullable=false)
-     * })
+     * Comment constructor.
      */
-    private $tricksId;
+    public function __construct()
+    {
+        $this->created_at = new DateTime();
+    }
 
     /**
      * @return int|null
@@ -80,26 +54,6 @@ class Comment
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    /**
-     * @param string $author
-     *
-     * @return $this
-     */
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
-
-        return $this;
     }
 
     /**
@@ -127,37 +81,17 @@ class Comment
      */
     public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
     /**
-     * @param DateTimeInterface $createdAt
+     * @param DateTimeInterface $created_at
      *
      * @return $this
      */
-    public function setCreatedAt(DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * @return DateTimeInterface|null
-     */
-    public function getUpdatedAt(): ?DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param DateTimeInterface $updatedAt
-     *
-     * @return $this
-     */
-    public function setUpdatedAt(DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
+        $this->created_at = $created_at;
 
         return $this;
     }
@@ -165,39 +99,39 @@ class Comment
     /**
      * @return User|null
      */
-    public function getUserId(): ?User
+    public function getUser(): ?User
     {
-        return $this->userId;
+        return $this->user;
     }
 
     /**
-     * @param User|null $userId
+     * @param User|null $user
      *
      * @return $this
      */
-    public function setUserId(?User $userId): self
+    public function setUser(?User $user): self
     {
-        $this->userId = $userId;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * @return Tricks|null
+     * @return Trick|null
      */
-    public function getTricksId(): ?Tricks
+    public function getTrick(): ?Trick
     {
-        return $this->tricksId;
+        return $this->trick;
     }
 
     /**
-     * @param Tricks|null $tricksId
+     * @param Trick|null $trick
      *
      * @return $this
      */
-    public function setTricksId(?Tricks $tricksId): self
+    public function setTrick(?Trick $trick): self
     {
-        $this->tricksId = $tricksId;
+        $this->trick = $trick;
 
         return $this;
     }

@@ -2,82 +2,46 @@
 
 namespace App\Entity;
 
-use App\Repository\PictureRepository;
-use DateTime;
-use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * Picture
- *
- * @ORM\Table(name="picture", indexes={@ORM\Index(name="IDX_16DB4F89A674A03E", columns={"tricks_id_id"}), @ORM\Index(name="IDX_16DB4F899D86650F", columns={"user_id_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\PictureRepository")
  */
 class Picture
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="author", type="string", length=30, nullable=false)
-     */
-    private $author;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=150, nullable=false)
-     */
-    private $title;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="path", type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $path;
 
     /**
-     * @var DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $createdAt;
+    private $caption;
 
     /**
-     * @var DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
+     * @var
      */
-    private $updatedAt;
+    private $file;
 
     /**
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id_id", referencedColumnName="id", nullable=false)
-     * })
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="pictures")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $userId;
-
-    /**
-     * @var Tricks
-     *
-     * @ORM\ManyToOne(targetEntity="Tricks")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tricks_id_id", referencedColumnName="id", nullable=false)
-     * })
-     */
-    private $tricksId;
+    private $trick;
 
     /**
      * @return int|null
@@ -85,46 +49,6 @@ class Picture
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    /**
-     * @param string $author
-     *
-     * @return $this
-     */
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     *
-     * @return $this
-     */
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
     }
 
     /**
@@ -148,81 +72,61 @@ class Picture
     }
 
     /**
-     * @return DateTimeInterface|null
+     * @return string|null
      */
-    public function getCreatedAt(): ?DateTimeInterface
+    public function getCaption(): ?string
     {
-        return $this->createdAt;
+        return $this->caption;
     }
 
     /**
-     * @param DateTimeInterface $createdAt
+     * @param string $caption
      *
      * @return $this
      */
-    public function setCreatedAt(DateTimeInterface $createdAt): self
+    public function setCaption(string $caption): self
     {
-        $this->createdAt = $createdAt;
+        $this->caption = $caption;
 
         return $this;
     }
 
     /**
-     * @return DateTimeInterface|null
+     * @return mixed
      */
-    public function getUpdatedAt(): ?DateTimeInterface
+    public function getFile()
     {
-        return $this->updatedAt;
+        return $this->file;
     }
 
     /**
-     * @param DateTimeInterface $updatedAt
+     * @param UploadedFile|null $file
      *
      * @return $this
      */
-    public function setUpdatedAt(DateTimeInterface $updatedAt): self
+    public function setFile(UploadedFile $file = null): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->file = $file;
 
         return $this;
     }
 
     /**
-     * @return User|null
+     * @return Trick|null
      */
-    public function getUserId(): ?User
+    public function getTrick(): ?Trick
     {
-        return $this->userId;
+        return $this->trick;
     }
 
     /**
-     * @param User|null $userId
+     * @param Trick|null $trick
      *
      * @return $this
      */
-    public function setUserId(?User $userId): self
+    public function setTrick(?Trick $trick): self
     {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * @return Tricks|null
-     */
-    public function getTricksId(): ?Tricks
-    {
-        return $this->tricksId;
-    }
-
-    /**
-     * @param Tricks|null $tricksId
-     *
-     * @return $this
-     */
-    public function setTricksId(?Tricks $tricksId): self
-    {
-        $this->tricksId = $tricksId;
+        $this->trick = $trick;
 
         return $this;
     }
