@@ -292,13 +292,16 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <executable path="composer" />
+    </execution>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
         <option value="SCSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -393,6 +396,11 @@
       <path value="$PROJECT_DIR$/vendor/phpstan/phpstan" />
       <path value="$PROJECT_DIR$/vendor/symfonycasts/verify-email-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/apache-pack" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/notifier" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
     </include_path>
   </component>
   <component name="ProjectId" id="1lSfJeUL8StEWPkH4lABcCuqAeC" />
@@ -426,14 +434,17 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\snowtricks\public\images" />
+      <recent name="C:\wamp64\www\snowtricks\public\uploads\profilePictures" />
       <recent name="C:\wamp64\www\snowtricks\templates\partial" />
       <recent name="C:\wamp64\www\snowtricks\public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\snowtricks\assets" />
+      <recent name="C:\wamp64\www\snowtricks\assets\js" />
       <recent name="C:\wamp64\www\snowtricks\public\uploads\profilePictures" />
       <recent name="C:\wamp64\www\snowtricks\public\uploads\pictures" />
       <recent name="C:\wamp64\www\snowtricks\templates\security" />
-      <recent name="C:\wamp64\www\snowtricks\src\Controller\Security" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

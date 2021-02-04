@@ -5,6 +5,7 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Trick;
 use App\Entity\Comment;
+use App\Repository\TrickRepository;
 use App\Form\TrickType;
 use App\Form\CommentType;
 use App\Service\Paginator;
@@ -36,22 +37,6 @@ class TrickController extends AbstractController
      */
     public function __construct(EntityManagerInterface $manager) {
         $this->manager = $manager;
-    }
-
-    /**
-     * @Route("/tricks", name="tricks", methods={"GET"})
-     *
-     * @return Response
-     */
-    public function index(): Response
-    {
-        $tricks = $this->getDoctrine()
-                       ->getRepository(Trick::class)
-                       ->findAll();
-
-        return $this->render('trick/tricks.html.twig', [
-            'tricks' => $tricks,
-        ]);
     }
 
     /**

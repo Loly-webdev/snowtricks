@@ -20,7 +20,6 @@ return [
         '/mot-de-passe-oublié' => [[['_route' => 'forgotten_password', '_controller' => 'App\\Controller\\Security\\ResetPasswordController::forgottenPassword'], null, null, null, false, false, null]],
         '/mon-compte' => [[['_route' => 'profile', '_controller' => 'App\\Controller\\Security\\UserController::edit'], null, null, null, false, false, null]],
         '/update_password' => [[['_route' => 'update_password', '_controller' => 'App\\Controller\\Security\\UserController::updatePassword'], null, null, null, false, false, null]],
-        '/tricks' => [[['_route' => 'tricks', '_controller' => 'App\\Controller\\TrickController::index'], null, ['GET' => 0], null, false, false, null]],
         '/trick/new' => [[['_route' => 'trick_new', '_controller' => 'App\\Controller\\TrickController::create'], null, null, null, false, false, null]],
     ],
     [ // $regexpList

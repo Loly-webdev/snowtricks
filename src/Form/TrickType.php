@@ -3,7 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Trick;
+use App\Form\VideoType;
 use App\Entity\Category;
+use App\Form\PictureType;
+use App\Form\ApplicationType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;

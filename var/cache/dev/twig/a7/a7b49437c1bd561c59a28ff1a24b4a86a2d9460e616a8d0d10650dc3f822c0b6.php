@@ -112,7 +112,7 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
         echo "        ";
         // line 8
         echo "        ";
-        echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackLinkTags("app");
+        echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackLinkTags("js/app");
         echo "
     ";
         
@@ -224,7 +224,7 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
 
         // line 33
         echo "    ";
-        echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackScriptTags("app");
+        echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackScriptTags("js/app");
         echo "
 ";
         
@@ -259,7 +259,7 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
     <title>{% block title %}Snowtricks{% endblock %}</title>
     {% block stylesheets %}
         {# 'app' must match the first argument to addEntry() in webpack.config.js #}
-        {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('js/app') }}
     {% endblock %}
 </head>
 <body>
@@ -284,7 +284,7 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
     </footer>
 {% endblock %}
 {% block javascripts %}
-    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('js/app') }}
 {% endblock %}
 </body>
 </html>

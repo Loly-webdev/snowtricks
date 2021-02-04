@@ -44,6 +44,9 @@ class __TwigTemplate_5f2708ad4706ebcb75710a1f0d838e18d7516a77531e63f976f988483a0
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "security/forgotten-password.html.twig"));
 
+        // line 2
+        $this->env->getRuntime("Symfony\\Component\\Form\\FormRenderer")->setTheme((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 2, $this->source); })()), [0 => "security/_collection.html.twig"], true);
+        // line 1
         $this->parent = $this->loadTemplate("base.html.twig", "security/forgotten-password.html.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
@@ -54,7 +57,7 @@ class __TwigTemplate_5f2708ad4706ebcb75710a1f0d838e18d7516a77531e63f976f988483a0
 
     }
 
-    // line 2
+    // line 3
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -64,8 +67,27 @@ class __TwigTemplate_5f2708ad4706ebcb75710a1f0d838e18d7516a77531e63f976f988483a0
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "content"));
 
-        // line 3
-        echo "    <h1>Mot de passe oublié</h1>
+        // line 4
+        echo "    <section class=\"default\">
+        <div class=\"default-title\">
+            <h2>Mot de passe oublié</h2>
+        </div>
+        <div class=\"default-form\">
+            ";
+        // line 9
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 9, $this->source); })()), 'form_start');
+        echo "
+            ";
+        // line 10
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 10, $this->source); })()), "email", [], "any", false, false, false, 10), 'row');
+        echo "
+            <input type=\"submit\" class=\"btn\" value=\"Envoyer\">
+            ";
+        // line 12
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 12, $this->source); })()), 'form_end');
+        echo "
+        </div>
+    </section>
 ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -87,14 +109,25 @@ class __TwigTemplate_5f2708ad4706ebcb75710a1f0d838e18d7516a77531e63f976f988483a0
 
     public function getDebugInfo()
     {
-        return array (  68 => 3,  58 => 2,  35 => 1,);
+        return array (  87 => 12,  82 => 10,  78 => 9,  71 => 4,  61 => 3,  50 => 1,  48 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("{% extends 'base.html.twig' %}
+{% form_theme form 'security/_collection.html.twig' %}
 {% block content %}
-    <h1>Mot de passe oublié</h1>
+    <section class=\"default\">
+        <div class=\"default-title\">
+            <h2>Mot de passe oublié</h2>
+        </div>
+        <div class=\"default-form\">
+            {{ form_start(form)}}
+            {{ form_row(form.email)}}
+            <input type=\"submit\" class=\"btn\" value=\"Envoyer\">
+            {{ form_end(form)}}
+        </div>
+    </section>
 {% endblock %}
 ", "security/forgotten-password.html.twig", "C:\\wamp64\\www\\snowtricks\\templates\\security\\forgotten-password.html.twig");
     }
