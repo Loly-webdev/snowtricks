@@ -47,7 +47,7 @@ class AppFixtures extends Fixture
             ->setUsername('eva')
             ->setEmail('eva@gmail.com')
             ->setPassword($password)
-            ->setProfilePicture('profile-picture-default.png')
+            ->setProfilePicture('profile-picture-default.jpeg')
             ->setCreatedAt(new DateTime());
         $manager->persist($user);
 
@@ -57,7 +57,7 @@ class AppFixtures extends Fixture
             ->setUsername('vincent')
             ->setEmail('vincent@gmail.com')
             ->setPassword($password)
-            ->setProfilePicture('dbz.jpg')
+            ->setProfilePicture('vince-profile.png')
             ->setCreatedAt(new DateTime());
         $manager->persist($user1);
 
@@ -67,7 +67,7 @@ class AppFixtures extends Fixture
             ->setUsername('marie')
             ->setEmail('marie@gmail.com')
             ->setPassword($password)
-            ->setProfilePicture('image-aza.jpeg')
+            ->setProfilePicture('marie-profile.png')
             ->setCreatedAt(new DateTime());
         $manager->persist($user2);
 

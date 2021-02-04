@@ -11,13 +11,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
  */
 class Paginator
 {
-    /**
-     * @var
-     */
     private $entity;
-    /**
-     * @var
-     */
     private $limit;
     /**
      * @var int
@@ -27,13 +21,7 @@ class Paginator
      * @var EntityManagerInterface
      */
     private $manager;
-    /**
-     * @var
-     */
     private $order;
-    /**
-     * @var
-     */
     private $attribute;
 
     /**

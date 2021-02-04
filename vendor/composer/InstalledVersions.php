@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'f8ee35c3ce2d6a312634e3540633eeec2c18c6b6',
+    'reference' => 'ba49c5a5b9aa77472233d243df8604f5dca80b71',
     'name' => '__root__',
   ),
   'versions' => 
@@ -31,7 +31,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'f8ee35c3ce2d6a312634e3540633eeec2c18c6b6',
+      'reference' => 'ba49c5a5b9aa77472233d243df8604f5dca80b71',
     ),
     'composer/package-versions-deprecated' => 
     array (
@@ -836,6 +836,15 @@ private static $installed = array (
       ),
       'reference' => 'c95468897f408dd0aca2ff582074423dd0455122',
     ),
+    'symfony/translation' => 
+    array (
+      'pretty_version' => 'v5.2.3',
+      'version' => '5.2.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c021864d4354ee55160ddcfd31dc477a1bc77949',
+    ),
     'symfony/translation-contracts' => 
     array (
       'pretty_version' => 'v2.3.0',
@@ -844,6 +853,13 @@ private static $installed = array (
       array (
       ),
       'reference' => 'e2eaa60b558f26a4b0354e1bbb25636efaaad105',
+    ),
+    'symfony/translation-implementation' => 
+    array (
+      'provided' => 
+      array (
+        0 => '2.0',
+      ),
     ),
     'symfony/twig-bridge' => 
     array (
