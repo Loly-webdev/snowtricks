@@ -25,10 +25,10 @@ class RegistrationType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username', TextType::class, $this->fieldsConfiguration('Veuillez saisir un pseudo.'))
-            ->add('email', EmailType::class, $this->fieldsConfiguration('Veuillez saisir une adresse email.'))
-            ->add('password', PasswordType::class, $this->fieldsConfiguration('Veuillez saisir un mot de passe.'))
-            ->add('passwordVerification', PasswordType::class, $this->fieldsConfiguration('Veuillez confirmer votre mot de passe.'))
+            ->add('username', TextType::class, $this->fieldsConfiguration('Votre pseudo.'))
+            ->add('email', EmailType::class, $this->fieldsConfiguration('Votre adresse email.'))
+            ->add('password', PasswordType::class, $this->fieldsConfiguration('Votre mot de passe.'))
+            ->add('passwordVerification', PasswordType::class, $this->fieldsConfiguration('Confirmer le mot de passe.'))
             ->add('profile_picture', FileType::class, [
                 'required' => false,
             ]);

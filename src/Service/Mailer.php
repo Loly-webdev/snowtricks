@@ -43,7 +43,7 @@ class Mailer
     {
         $email = (new TemplatedEmail())
             ->from(new Address($from))
-            ->to(new Address($toEmail,$toUsername))
+            ->to(new Address($toEmail, $toUsername))
             ->subject($subject)
             ->htmlTemplate($template)
             ->context(

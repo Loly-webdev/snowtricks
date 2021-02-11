@@ -39,11 +39,11 @@ class Paginator
      */
     public function getData(): array
     {
-        if(empty($this->entity)) {
+        if (empty($this->entity)) {
             throw new Exception("L'entité n'a pas été spécifié");
         }
         $offset = $this->currentPage * $this->limit - $this->limit;
-        $repo = $this->manager->getRepository($this->entity);
+        $repo   = $this->manager->getRepository($this->entity);
 
         return $repo->findBy($this->attribute, $this->order, $this->limit, $offset);
     }
@@ -53,10 +53,10 @@ class Paginator
      */
     public function getPages()
     {
-        if(empty($this->entity)) {
+        if (empty($this->entity)) {
             throw new Exception("L'entité n'a pas été spécifié");
         }
-        $repo = $this->manager->getRepository($this->entity);
+        $repo  = $this->manager->getRepository($this->entity);
         $total = count($repo->findBy($this->attribute));
 
         return ceil($total / $this->limit);

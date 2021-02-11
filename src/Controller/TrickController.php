@@ -35,7 +35,8 @@ class TrickController extends AbstractController
      *
      * @param EntityManagerInterface $manager
      */
-    public function __construct(EntityManagerInterface $manager) {
+    public function __construct(EntityManagerInterface $manager)
+    {
         $this->manager = $manager;
     }
 
@@ -54,12 +55,12 @@ class TrickController extends AbstractController
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $pictures = $form['pictures']->getData();
-            foreach($pictures as $picture) {
+            foreach ($pictures as $picture) {
                 $uploadedFile = $picture->getFile();
-                if($uploadedFile) {
+                if ($uploadedFile) {
                     $newFilename = $uploaderHelper->uploadPicture($uploadedFile, 'pictures');
                     $picture->setPath($newFilename);
                 }
@@ -67,7 +68,7 @@ class TrickController extends AbstractController
                 $this->manager->persist($picture);
             }
 
-            foreach($trick->getVideos() as $video) {
+            foreach ($trick->getVideos() as $video) {
                 $video->setTrick($trick);
                 $this->manager->persist($video);
             }
@@ -83,7 +84,7 @@ class TrickController extends AbstractController
         }
         return $this->render('trick/new.html.twig', [
             'controller_name' => 'TrickController',
-            'form' => $form->createView()
+            'form'            => $form->createView()
         ]);
     }
 
@@ -100,11 +101,11 @@ class TrickController extends AbstractController
     {
 
         $originalPictures = new ArrayCollection();
-        $originalVideos = new ArrayCollection();
+        $originalVideos   = new ArrayCollection();
 
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             foreach ($originalPictures as $picture) {
                 if (false === $trick->getPictures()->contains($picture)) {
                     $picture->getTrick()->removeElement($trick);
@@ -112,9 +113,9 @@ class TrickController extends AbstractController
                 }
             }
             $pictures = $form['pictures']->getData();
-            foreach($pictures as $picture) {
+            foreach ($pictures as $picture) {
                 $uploadedFile = $picture->getFile();
-                if($uploadedFile) {
+                if ($uploadedFile) {
                     $newFilename = $uploaderHelper->uploadPicture($uploadedFile, 'pictures');
                     $picture->setPath($newFilename);
                 }
@@ -130,7 +131,7 @@ class TrickController extends AbstractController
             }
 
             $videos = $form['videos']->getData();
-            foreach($videos as $video) {
+            foreach ($videos as $video) {
                 $video->setTrick($trick);
                 $this->manager->persist($video);
             }
@@ -144,8 +145,8 @@ class TrickController extends AbstractController
         }
         return $this->render('trick/edit.html.twig', [
             'controller_name' => 'TrickController',
-            'trick' => $trick,
-            'form' => $form->createView()
+            'trick'           => $trick,
+            'form'            => $form->createView()
         ]);
     }
 
@@ -161,7 +162,7 @@ class TrickController extends AbstractController
         $filesystem = new Filesystem();
 
         foreach ($trick->getPictures() as $picture) {
-            $filesystem->remove('uploads/pictures/' .$picture->getPath());
+            $filesystem->remove('uploads/pictures/' . $picture->getPath());
         }
 
         $this->manager->remove($trick);
@@ -183,11 +184,10 @@ class TrickController extends AbstractController
     public function show(Trick $trick, Request $request, $page, Paginator $paginator): Response
     {
         $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
+        $form    = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $comment->setTrick($trick);
             $comment->setUser($this->getUser());
 
@@ -204,15 +204,14 @@ class TrickController extends AbstractController
             ->setOrder(['created_at' => 'DESC'])
             ->setAttribute(['trick' => $trick])
             ->setCurrentPage($page)
-            ->setLimit(4)
-        ;
+            ->setLimit(4);
 
         return $this->render('trick/show.html.twig', [
             'controller_name' => 'TrickController',
-            'trick' => $trick,
-            'paginator' => $paginator,
-            'user' => $this->getUser(),
-            'form' => $form->createView()
+            'trick'           => $trick,
+            'paginator'       => $paginator,
+            'user'            => $this->getUser(),
+            'form'            => $form->createView()
         ]);
     }
 }

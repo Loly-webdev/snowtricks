@@ -1,6 +1,8 @@
 {% block form_row %}
     <div class="default-form-row">
-        {{ form_label(form) }}
+        <label class="font-weight-bold text-info">
+            {{ form_label(form) }}
+        </label>
         {{ form_widget(form) }}
         <div class="default-form-row-error">
             {{ form_errors(form) }}
