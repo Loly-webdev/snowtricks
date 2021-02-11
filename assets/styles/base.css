@@ -21,3 +21,13 @@ main {
 nav img {
     width: 100px;
 }
+
+a {
+    text-decoration: none;
+}
+
+.about-content {
+    text-align: center;
+    color: darkgray;
+    font-weight: bold;
+}
