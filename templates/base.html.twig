@@ -2,10 +2,10 @@
 <html lang="fr">
 <head>
     {{ include('partial/_head.html.twig') }}
-    <title>{% block title %}Snowtricks{% endblock %}</title>
+    <title>Snowtricks - {% block title %}Bienvenue{% endblock %}</title>
     {% block stylesheets %}
         {# 'app' must match the first argument to addEntry() in webpack.config.js #}
-        {{ encore_entry_link_tags('js/app') }}
+        {{ encore_entry_link_tags('styles/app') }}
     {% endblock %}
 </head>
 <body>

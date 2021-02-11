@@ -32,9 +32,6 @@ class Picture
      */
     private $caption;
 
-    /**
-     * @var
-     */
     private $file;
 
     /**

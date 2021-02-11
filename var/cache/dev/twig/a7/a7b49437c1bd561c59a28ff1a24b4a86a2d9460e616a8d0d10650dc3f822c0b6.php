@@ -52,7 +52,7 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
         // line 4
         echo twig_include($this->env, $context, "partial/_head.html.twig");
         echo "
-    <title>";
+    <title>Snowtricks - ";
         // line 5
         $this->displayBlock('title', $context, $blocks);
         echo "</title>
@@ -89,7 +89,7 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        echo "Snowtricks";
+        echo "Bienvenue";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -112,7 +112,7 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
         echo "        ";
         // line 8
         echo "        ";
-        echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackLinkTags("js/app");
+        echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackLinkTags("styles/app");
         echo "
     ";
         
@@ -256,10 +256,10 @@ class __TwigTemplate_9b275bc7bc164f11835b9f9aec4239f39cacd21c4b7ee25fdcdc358a372
 <html lang=\"fr\">
 <head>
     {{ include('partial/_head.html.twig') }}
-    <title>{% block title %}Snowtricks{% endblock %}</title>
+    <title>Snowtricks - {% block title %}Bienvenue{% endblock %}</title>
     {% block stylesheets %}
         {# 'app' must match the first argument to addEntry() in webpack.config.js #}
-        {{ encore_entry_link_tags('js/app') }}
+        {{ encore_entry_link_tags('styles/app') }}
     {% endblock %}
 </head>
 <body>

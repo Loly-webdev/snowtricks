@@ -19,8 +19,8 @@ class MainController extends AbstractController
     {
         return $this->render('main/index.html.twig', [
             'controller_name' => 'HomeController',
-            'tricks' => $trickRepository->findByOrderAndLimit(),
-            'tricks_more' => $trickRepository->findForReadMore()
+            'tricks'          => $trickRepository->findByOrderAndLimit(),
+            'tricks_more'     => $trickRepository->findForReadMore()
         ]);
     }
 }

@@ -8,6 +8,7 @@ use App\Form\RegistrationType;
 use App\Service\UploaderHelper;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,8 +35,8 @@ class RegistrationController extends AbstractController
 
     public function __construct(EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, TokenGeneratorInterface $tokenGenerator)
     {
-        $this->manager = $manager;
-        $this->encoder = $encoder;
+        $this->manager        = $manager;
+        $this->encoder        = $encoder;
         $this->tokenGenerator = $tokenGenerator;
     }
 
@@ -46,7 +47,6 @@ class RegistrationController extends AbstractController
      * @param Mailer         $mailer
      *
      * @return Response
-     * @throws TransportExceptionInterface
      */
     public function register(Request $request, UploaderHelper $uploaderHelper, Mailer $mailer): Response
     {
@@ -60,7 +60,8 @@ class RegistrationController extends AbstractController
             if ($uploadedFile) {
                 $newFilename = $uploaderHelper->uploadPicture($uploadedFile, 'profilePictures');
                 $user->setProfilePicture($newFilename);
-            } else {
+            }
+            else {
                 $user->setProfilePicture('profile-picture-default.png');
             }
 
@@ -69,8 +70,8 @@ class RegistrationController extends AbstractController
             $this->manager->persist($user);
             $this->manager->flush();
 
-            $mailer->sendMessage('noreply@snowtricks.com',$user->getEmail(), $user->getUsername(),'Activer votre compte','email/activation.html.twig',[
-                'user' => $user,
+            $mailer->sendMessage('noreply@snowtricks.com', $user->getEmail(), $user->getUsername(), 'Activer votre compte', 'email/activation.html.twig', [
+                'user'  => $user,
                 'token' => $user->getActivationToken()
             ]);
 
@@ -78,7 +79,7 @@ class RegistrationController extends AbstractController
         }
         return $this->render('security/register.html.twig', [
             'controller_name' => 'AccountController',
-            'form' => $form->createView()
+            'form'            => $form->createView()
         ]);
     }
 
@@ -89,7 +90,7 @@ class RegistrationController extends AbstractController
      *
      * @return RedirectResponse
      */
-    public function activation($token, UserRepository $userRepository)
+    public function activation($token, UserRepository $userRepository): RedirectResponse
     {
         $user = $userRepository->findOneBy(['activation_token' => $token]);
 

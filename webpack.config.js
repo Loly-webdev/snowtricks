@@ -24,8 +24,7 @@ Encore
     .addEntry('js/add-trick', './assets/js/add-trick.js')
     .addEntry('js/edit-trick', './assets/js/edit-trick.js')
 
-    .addStyleEntry('css/base', './assets/styles/base.css')
-    .addStyleEntry('css/app', './assets/styles/app.scss')
+    .addStyleEntry('styles/app', './assets/styles/app.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

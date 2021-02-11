@@ -8,6 +8,7 @@ use App\Form\ResetPasswordType;
 use App\Repository\UserRepository;
 use App\Form\ForgottenPasswordType;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,8 +36,8 @@ class ResetPasswordController extends AbstractController
 
     public function __construct(EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, TokenGeneratorInterface $tokenGenerator)
     {
-        $this->manager = $manager;
-        $this->encoder = $encoder;
+        $this->manager        = $manager;
+        $this->encoder        = $encoder;
         $this->tokenGenerator = $tokenGenerator;
     }
 
@@ -54,8 +55,8 @@ class ResetPasswordController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $datas = $form->getData();
-            $user = $userRepository->findOneByEmail($datas['email']);
+            $data = $form->getData();
+            $user  = $userRepository->findOneByEmail($data['email']);
 
             if (!$user) {
                 $this->addFlash('error', 'Cette adresse e-mail est inconnue');
@@ -68,13 +69,13 @@ class ResetPasswordController extends AbstractController
                 $user->setResetToken($token);
                 $this->manager->persist($user);
                 $this->manager->flush();
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->addFlash('error', $e->getMessage());
                 return $this->redirectToRoute('login');
             }
 
-            $mailer->sendMessage('noreply@snowtricks.com', $user->getEmail(), $user->getUsername(), 'Mot de passe oublié', 'email/reset-password.html.twig.html.twig', [
-                'user' => $user,
+            $mailer->sendMessage('noreply@snowtricks.com', $user->getEmail(), $user->getUsername(), 'Mot de passe oublié', 'email/reset-password.html.twig', [
+                'user'  => $user,
                 'token' => $user->getResetToken()
             ]);
 
@@ -85,7 +86,7 @@ class ResetPasswordController extends AbstractController
 
         return $this->render('security/forgotten-password.html.twig', [
             'controller_name' => 'AccountController',
-            'form' => $form->createView(),
+            'form'            => $form->createView(),
         ]);
     }
 
@@ -118,10 +119,10 @@ class ResetPasswordController extends AbstractController
 
             return $this->redirectToRoute('login');
         }
-        return $this->render('security/reset-password.html.twig.html.twig', [
+        return $this->render('security/reset-password.html.twig', [
             'controller_name' => 'AccountController',
-            'token' => $token,
-            'form' => $form->createView()
+            'token'           => $token,
+            'form'            => $form->createView()
         ]);
     }
 }

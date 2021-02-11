@@ -110,7 +110,7 @@
     <parameter key="kernel.secret">%env(APP_SECRET)%</parameter>
     <parameter key="kernel.http_method_override">true</parameter>
     <parameter key="kernel.trusted_hosts" type="collection"/>
-    <parameter key="kernel.default_locale">en</parameter>
+    <parameter key="kernel.default_locale">fr</parameter>
     <parameter key="kernel.error_controller">error_controller</parameter>
     <parameter key="debug.file_link_format">null</parameter>
     <parameter key="cache.prefix.seed">_C:\wamp64\www\snowtricks.App_KernelDevDebugContainer</parameter>
@@ -312,6 +312,10 @@
         <parameter>mailer</parameter>
         <parameter>@WebProfiler/Collector/mailer.html.twig</parameter>
       </parameter>
+      <parameter key="notifier.data_collector" type="collection">
+        <parameter>notifier</parameter>
+        <parameter>@WebProfiler/Collector/notifier.html.twig</parameter>
+      </parameter>
       <parameter key="data_collector.config" type="collection">
         <parameter>config</parameter>
         <parameter>@WebProfiler/Collector/config.html.twig</parameter>
@@ -457,7 +461,7 @@
       <tag name="container.hot_path"/>
       <tag name="container.hot_path"/>
       <argument type="service" id="request_stack"/>
-      <argument>en</argument>
+      <argument>fr</argument>
       <argument type="service" id="router.default" on-invalid="ignore"/>
     </service>
     <service id="validate_request_listener" class="Symfony\Component\HttpKernel\EventListener\ValidateRequestListener">
@@ -650,7 +654,7 @@
     </service>
     <service id="slugger" class="Symfony\Component\String\Slugger\AsciiSlugger">
       <tag name="kernel.locale_aware"/>
-      <argument>en</argument>
+      <argument>fr</argument>
     </service>
     <service id="container.getenv" class="Closure">
       <tag name="routing.expression_language_function" function="env"/>
@@ -873,7 +877,7 @@
       <argument type="service" id="translation.writer"/>
       <argument type="service" id="translation.reader"/>
       <argument type="service" id="translation.extractor"/>
-      <argument>en</argument>
+      <argument>fr</argument>
       <argument>C:\wamp64\www\snowtricks/translations</argument>
       <argument>C:\wamp64\www\snowtricks/templates</argument>
       <argument type="collection">
@@ -1488,6 +1492,74 @@
       <argument>null</argument>
       <argument type="service" id="monolog.logger" on-invalid="ignore"/>
     </service>
+    <service id="notifier" class="Symfony\Component\Notifier\Notifier">
+      <argument type="service" id=".service_locator.clUEvlF"/>
+      <argument type="service" id="notifier.channel_policy" on-invalid="ignore"/>
+    </service>
+    <service id="notifier.channel_policy" class="Symfony\Component\Notifier\Channel\ChannelPolicy">
+      <argument type="collection"/>
+    </service>
+    <service id="notifier.channel.browser" class="Symfony\Component\Notifier\Channel\BrowserChannel">
+      <tag name="notifier.channel" channel="browser"/>
+      <argument type="service" id="request_stack"/>
+    </service>
+    <service id="notifier.channel.chat" class="Symfony\Component\Notifier\Channel\ChatChannel">
+      <tag name="notifier.channel" channel="chat"/>
+      <argument type="service" id="chatter.transports"/>
+      <argument>null</argument>
+    </service>
+    <service id="notifier.channel.sms" class="Symfony\Component\Notifier\Channel\SmsChannel">
+      <tag name="notifier.channel" channel="sms"/>
+      <argument type="service" id="texter.transports"/>
+      <argument>null</argument>
+    </service>
+    <service id="notifier.channel.email" class="Symfony\Component\Notifier\Channel\EmailChannel">
+      <tag name="notifier.channel" channel="email"/>
+      <argument type="service" id="mailer.transports"/>
+      <argument>null</argument>
+      <argument>null</argument>
+    </service>
+    <service id="notifier.monolog_handler" class="Symfony\Bridge\Monolog\Handler\NotifierHandler">
+      <argument type="service" id="notifier"/>
+    </service>
+    <service id="notifier.failed_message_listener" class="Symfony\Component\Notifier\EventListener\SendFailedMessageToNotifierListener">
+      <argument type="service" id="notifier"/>
+    </service>
+    <service id="chatter.transports" class="Symfony\Component\Notifier\Transport\Transports">
+      <argument type="collection"/>
+      <factory service="chatter.transport_factory" method="fromStrings"/>
+    </service>
+    <service id="chatter.transport_factory" class="Symfony\Component\Notifier\Transport">
+      <argument type="tagged_iterator" tag="chatter.transport_factory"/>
+    </service>
+    <service id="chatter.messenger.chat_handler" class="Symfony\Component\Notifier\Messenger\MessageHandler">
+      <tag name="messenger.message_handler" handles="Symfony\Component\Notifier\Message\ChatMessage"/>
+      <argument type="service" id="chatter.transports"/>
+    </service>
+    <service id="texter.transports" class="Symfony\Component\Notifier\Transport\Transports">
+      <argument type="collection"/>
+      <factory service="texter.transport_factory" method="fromStrings"/>
+    </service>
+    <service id="texter.transport_factory" class="Symfony\Component\Notifier\Transport">
+      <argument type="tagged_iterator" tag="texter.transport_factory"/>
+    </service>
+    <service id="texter.messenger.sms_handler" class="Symfony\Component\Notifier\Messenger\MessageHandler">
+      <tag name="messenger.message_handler" handles="Symfony\Component\Notifier\Message\SmsMessage"/>
+      <argument type="service" id="texter.transports"/>
+    </service>
+    <service id="notifier.logger_notification_listener" class="Symfony\Component\Notifier\EventListener\NotificationLoggerListener">
+      <tag name="kernel.event_subscriber"/>
+    </service>
+    <service id="notifier.transport_factory.abstract" class="Symfony\Component\Notifier\Transport\AbstractTransportFactory" abstract="true">
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument type="service" id="http_client" on-invalid="ignore"/>
+    </service>
+    <service id="notifier.transport_factory.null" class="Symfony\Component\Notifier\Transport\NullTransportFactory">
+      <tag name="chatter.transport_factory"/>
+      <tag name="texter.transport_factory"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument>null</argument>
+    </service>
     <service id="validator.builder" class="Symfony\Component\Validator\ValidatorBuilder">
       <call method="setConstraintValidatorFactory">
         <argument type="service" id="validator.validator_factory"/>
@@ -1563,7 +1635,7 @@
       <tag name="kernel.locale_aware"/>
       <argument type="service" id=".service_locator.O24_MAy"/>
       <argument type="service" id="translator.formatter.default"/>
-      <argument>en</argument>
+      <argument>fr</argument>
       <argument type="collection">
         <argument key="translation.loader.php" type="collection">
           <argument>php</argument>
@@ -1920,7 +1992,7 @@
       </call>
       <call method="setFallbackLocales">
         <argument type="collection">
-          <argument>en</argument>
+          <argument>fr</argument>
         </argument>
       </call>
     </service>
@@ -2172,6 +2244,9 @@
         <argument type="service" id="mailer.data_collector"/>
       </call>
       <call method="add">
+        <argument type="service" id="notifier.data_collector"/>
+      </call>
+      <call method="add">
         <argument type="service" id="data_collector.config"/>
       </call>
     </service>
@@ -2325,6 +2400,10 @@
     <service id="mailer.message_logger_listener" class="Symfony\Component\Mailer\EventListener\MessageLoggerListener">
       <tag name="kernel.event_subscriber"/>
       <tag name="kernel.reset" method="reset"/>
+    </service>
+    <service id="notifier.data_collector" class="Symfony\Component\Notifier\DataCollector\NotificationDataCollector">
+      <tag name="data_collector" template="@WebProfiler/Collector/notifier.html.twig" id="notifier"/>
+      <argument type="service" id="notifier.logger_notification_listener"/>
     </service>
     <service id="debug.debug_handlers_listener" class="Symfony\Component\HttpKernel\EventListener\DebugHandlersListener">
       <tag name="kernel.event_subscriber"/>
@@ -2530,6 +2609,14 @@
         <argument type="collection">
           <argument type="service" id="mailer.envelope_listener"/>
           <argument>onMessage</argument>
+        </argument>
+        <argument>-255</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Notifier\Event\MessageEvent</argument>
+        <argument type="collection">
+          <argument type="service" id="notifier.logger_notification_listener"/>
+          <argument>onNotification</argument>
         </argument>
         <argument>-255</argument>
       </call>
@@ -2872,7 +2959,7 @@
       <argument type="service" id="router.request_context" on-invalid="ignore"/>
       <argument type="service" id="parameter_bag" on-invalid="ignore"/>
       <argument type="service" id="monolog.logger.router" on-invalid="ignore"/>
-      <argument>en</argument>
+      <argument>fr</argument>
       <call method="setConfigCacheFactory">
         <argument type="service" id="config_cache_factory"/>
       </call>
@@ -5761,6 +5848,15 @@
         <argument key="session_storage" type="service" id="session.storage.native" on-invalid="ignore"/>
       </argument>
     </service>
+    <service id=".service_locator.clUEvlF" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="browser" type="service" id="notifier.channel.browser"/>
+        <argument key="chat" type="service" id="notifier.channel.chat"/>
+        <argument key="email" type="service" id="notifier.channel.email"/>
+        <argument key="sms" type="service" id="notifier.channel.sms"/>
+      </argument>
+    </service>
     <service id=".service_locator.kODoftA" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6146,6 +6242,9 @@
     <service id="mailer.logger_message_listener" alias="mailer.message_logger_listener">
       <deprecated package="symfony/framework-bundle" version="5.2">The "%alias_id%" alias is deprecated, use "mailer.message_logger_listener" instead.</deprecated>
     </service>
+    <service id="Symfony\Component\Notifier\NotifierInterface" alias="notifier"/>
+    <service id="Symfony\Component\Notifier\ChatterInterface" alias="chatter"/>
+    <service id="Symfony\Component\Notifier\TexterInterface" alias="texter"/>
     <service id="Symfony\Component\Validator\Validator\ValidatorInterface" alias="debug.validator"/>
     <service id="validator.mapping.class_metadata_factory" alias="debug.validator"/>
     <service id="Symfony\Component\Translation\Reader\TranslationReaderInterface" alias="translation.reader"/>

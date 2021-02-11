@@ -3,15 +3,8 @@
     "js/app": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors~css/app~js/app.js",
         "/build/vendors~js/app.js",
-        "/build/css/app~js/app.js",
         "/build/js/app.js"
-      ],
-      "css": [
-        "/build/vendors~css/app~js/app.css",
-        "/build/css/app~js/app.css",
-        "/build/js/app.css"
       ]
     },
     "js/add-trick": {
@@ -28,23 +21,14 @@
         "/build/js/edit-trick.js"
       ]
     },
-    "css/base": {
-      "js": [
-        "/build/runtime.js"
-      ],
-      "css": [
-        "/build/css/base.css"
-      ]
-    },
-    "css/app": {
+    "styles/app": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors~css/app~js/app.js",
-        "/build/css/app~js/app.js"
+        "/build/vendors~styles/app.js"
       ],
       "css": [
-        "/build/vendors~css/app~js/app.css",
-        "/build/css/app~js/app.css"
+        "/build/vendors~styles/app.css",
+        "/build/styles/app.css"
       ]
     }
   }
