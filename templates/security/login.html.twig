@@ -1,41 +1,39 @@
 {% extends 'base.html.twig' %}
 {% block title %}Se connecter{% endblock %}
 {% block content %}
-    <section class="login">
-        <div class="container my-5 text-center"><br>
-            <h2 class="mb-5">Connexion</h2>
-            <div class="border py-5">
-                {% if error %}
-                    <div class="login-error">
-                        {{ error.messageKey|trans(error.messageData,'security') }}
-                    </div>
-                {% endif %}
-                <form action="{{ path('login') }}" class="login-form" method="POST">
-                    <div class="login-form-row">
-                            <label class="font-weight-bold text-info" for="_username">
-                                Pseudo
-                            </label>
-                            <input type="text" name="_username" placeholder="Votre pseudo."
-                                   value="{{ lastUsername }}" required>
-                    </div>
-                    <div class="login-form-row">
-                        <label class="font-weight-bold text-info" for="_password">
-                            Mot de passe
-                        </label>
-                        <input type="password" name="_password" placeholder="Votre mot de passe."
-                               required>
-                    </div>
-                    <p class="my-3 font-weight-bold">
-                        <a href="{{ path('forgotten_password') }}">
-                            Mot de passe oublié ?
-                        </a>
-                    </p>
-                    <button type="submit" class="mt-2 btn-round-shadow btn btn-success">
-                        <span class="fas fa-sign-in-alt"></span>
-                        Connexion
-                    </button>
-                </form>
-            </div>
+    <div class="container my-5 text-center"><br>
+        <h2 class="mb-5">Connexion</h2>
+        <div class="border py-5">
+            {% if error %}
+                <div class="login-error">
+                    {{ error.messageKey|trans(error.messageData,'security') }}
+                </div>
+            {% endif %}
+            <form action="{{ path('login') }}" class="login-form" method="POST">
+                <div class="login-form-row">
+                    <label class="font-weight-bold text-info" for="_username">
+                        Pseudo
+                    </label>
+                    <input type="text" name="_username" placeholder="Votre pseudo."
+                           value="{{ lastUsername }}" required>
+                </div>
+                <div class="login-form-row">
+                    <label class="font-weight-bold text-info" for="_password">
+                        Mot de passe
+                    </label>
+                    <input type="password" name="_password" placeholder="Votre mot de passe."
+                           required>
+                </div>
+                <p class="my-3 font-weight-bold">
+                    <a href="{{ path('forgotten_password') }}">
+                        Mot de passe oublié ?
+                    </a>
+                </p>
+                <button type="submit" class="mt-2 btn-round-shadow btn btn-success">
+                    <span class="fas fa-sign-in-alt"></span>
+                    Connexion
+                </button>
+            </form>
         </div>
-    </section>
+    </div>
 {% endblock %}

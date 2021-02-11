@@ -27,9 +27,9 @@ class TrickType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class, $this->fieldsConfiguration('Veuillez saisir le nom de la figure.')
+            ->add('name', TextType::class, $this->fieldsConfiguration('Nom de la figure')
             )
-            ->add('description', TextareaType::class, $this->fieldsConfiguration('Veuillez saisir un descriptif de la figure.')
+            ->add('description', TextareaType::class, $this->fieldsConfiguration('Description de la figure')
             )
             ->add('category', EntityType::class, [
                 'class'        => Category::class,
