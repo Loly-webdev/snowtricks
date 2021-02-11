@@ -67,7 +67,7 @@ class __TwigTemplate_3524b8eb6a4aa836d60d908092e6bc4604d186ef33c75a30310980ec583
         $this->displayBlock('body', $context, $blocks);
         // line 32
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 35
+        // line 37
         echo "</body>
 </html>
 ";
@@ -226,6 +226,14 @@ class __TwigTemplate_3524b8eb6a4aa836d60d908092e6bc4604d186ef33c75a30310980ec583
         echo "    ";
         echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackScriptTags("js/app");
         echo "
+    ";
+        // line 34
+        echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackScriptTags("js/add-trick");
+        echo "
+    ";
+        // line 35
+        echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackScriptTags("js/edit-trick");
+        echo "
 ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -247,7 +255,7 @@ class __TwigTemplate_3524b8eb6a4aa836d60d908092e6bc4604d186ef33c75a30310980ec583
 
     public function getDebugInfo()
     {
-        return array (  226 => 33,  216 => 32,  198 => 25,  185 => 29,  180 => 26,  178 => 25,  175 => 24,  168 => 22,  159 => 20,  155 => 19,  150 => 18,  146 => 17,  140 => 14,  137 => 13,  127 => 12,  114 => 8,  112 => 7,  102 => 6,  83 => 5,  71 => 35,  69 => 32,  67 => 12,  63 => 10,  61 => 6,  57 => 5,  53 => 4,  48 => 1,);
+        return array (  235 => 35,  231 => 34,  226 => 33,  216 => 32,  198 => 25,  185 => 29,  180 => 26,  178 => 25,  175 => 24,  168 => 22,  159 => 20,  155 => 19,  150 => 18,  146 => 17,  140 => 14,  137 => 13,  127 => 12,  114 => 8,  112 => 7,  102 => 6,  83 => 5,  71 => 37,  69 => 32,  67 => 12,  63 => 10,  61 => 6,  57 => 5,  53 => 4,  48 => 1,);
     }
 
     public function getSourceContext()
@@ -285,6 +293,8 @@ class __TwigTemplate_3524b8eb6a4aa836d60d908092e6bc4604d186ef33c75a30310980ec583
 {% endblock %}
 {% block javascripts %}
     {{ encore_entry_script_tags('js/app') }}
+    {{ encore_entry_script_tags('js/add-trick') }}
+    {{ encore_entry_script_tags('js/edit-trick') }}
 {% endblock %}
 </body>
 </html>

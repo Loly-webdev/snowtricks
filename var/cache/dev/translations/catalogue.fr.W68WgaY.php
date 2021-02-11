@@ -26,7 +26,7 @@ $catalogue = new MessageCatalogue('fr', array (
   'trick-form' => 
   array (
     'Name' => 'Nom de la figure',
-    'Description' => 'Descriptif',
+    'Description' => 'Description',
     'Category' => 'Catégorie',
   ),
   'video-form' => 

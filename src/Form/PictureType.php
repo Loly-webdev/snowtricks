@@ -26,7 +26,7 @@ class PictureType extends ApplicationType
             ->add('file', FileType::class,
                   [
                       'required' => false])
-            ->add('caption', TextType::class, $this->fieldsConfiguration("Veuillez saisir un titre."));
+            ->add('caption', TextType::class, $this->fieldsConfiguration("Titre de l'image"));
     }
 
     /**
