@@ -186,6 +186,14 @@ $catalogue = new MessageCatalogue('fr', array (
     'Too many failed login attempts, please try again later.' => 'Plusieurs tentatives de connexion ont échoué, veuillez réessayer plus tard.',
     'Invalid or expired login link.' => 'Lien de connexion invalide ou expiré.',
   ),
+  'VerifyEmailBundle' => 
+  array (
+    '%count% year|%count% years' => '%count% année|%count% années',
+    '%count% month|%count% months' => '%count% mois|%count% mois',
+    '%count% day|%count% days' => '%count% jour|%count% jours',
+    '%count% hour|%count% hours' => '%count% heure|%count% heures',
+    '%count% minute|%count% minutes' => '%count% minute|%count% minutes',
+  ),
 ));
 
 

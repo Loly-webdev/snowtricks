@@ -26,9 +26,9 @@ webpack_encore:
     # output_path: false
 
     # Set attributes that will be rendered on all script and link tags
-    # script_attributes:
-    #     defer: true
-    #     referrerpolicy: origin
+    script_attributes:
+        defer: true
+        # referrerpolicy: origin
     # link_attributes:
     #     referrerpolicy: origin
     
@@ -196,6 +196,45 @@ class ScriptNonceSubscriber implements EventSubscriberInterface
         }
     }
 }
+```
+
+## Stimulus / Symfony UX Helper: stimulus_controller
+
+This bundle also ships with a special `stimulus_controller()` Twig function
+that can be used to render [Stimulus Controllers & Values](https://stimulus.hotwire.dev/reference/values).
+See [stimulus-bridge](https://github.com/symfony/stimulus-bridge) for more details.
+
+For example:
+
+```twig
+<div {{ stimulus_controller('chart', { 'name': 'Likes', 'data': [1, 2, 3, 4] }) }}>
+    Hello
+</div>
+
+<!-- would render -->
+<div
+   data-controller="chart"
+   data-chart-name-value="Likes"
+   data-chart-name-data="&#x5B;1,2,3,4&#x5D;"
+>
+   Hello
+</div>
+```
+
+Any non-scalar values (like `data: [1, 2, 3, 4]`) are JSON-encoded. And all
+values are properly escaped (the string `&#x5B;` is an escaped
+`[` character, so the attribute is really `[1,2,3,4]`).
+
+If you have multiple controllers on the same element, pass them all as an
+associative array in the first argument:
+
+```twig
+<div {{ stimulus_controller({
+    'chart': { 'name': 'Likes' },
+    'other-controller': { },
+) }}>
+    Hello
+</div>
 ```
 
 Ok, have fun!
