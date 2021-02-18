@@ -62,28 +62,22 @@ class __TwigTemplate_2b9516bfa996768c5701746d40260ebdf309acbe2016696fbb547fdf3c1
                 Accueil
                 </a>
             </li>
-            <li id=\"tricks\" class=\"active nav-item\">
-                <a class=\"nav-link\" href=\"";
-        // line 18
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("tricks");
-        echo "\">
-                    <span class=\"fas fa-user\"></span>
-                    Tricks
-                </a>
-            </li>
             ";
-        // line 23
-        if (twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 23, $this->source); })()), "user", [], "any", false, false, false, 23)) {
-            // line 24
+        // line 17
+        if (twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 17, $this->source); })()), "user", [], "any", false, false, false, 17)) {
+            // line 18
             echo "                <li id=\"new-trick\" class=\"active nav-item\">
                     <a class=\"nav-link\" href=\"";
-            // line 25
+            // line 19
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("trick_new");
-            echo "\">Nouvelle trick</a>
+            echo "\">
+                        <span class=\"fas fa-snowboarding\"></span>
+                        Nouvelle trick
+                    </a>
                 </li>
                 <li id=\"profile\" class=\"active nav-item\">
                     <a class=\"nav-link\" href=\"";
-            // line 28
+            // line 25
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("profile");
             echo "\">
                         <span class=\"fas fa-user\"></span>
@@ -92,19 +86,19 @@ class __TwigTemplate_2b9516bfa996768c5701746d40260ebdf309acbe2016696fbb547fdf3c1
                 </li>
                 <div class=\"text-center m-1\">
                     <a id=\"authentication\" href=\"";
-            // line 34
+            // line 31
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("logout");
-            echo "\" class=\"btn btn-outline-error\">
+            echo "\" class=\"btn btn-outline-danger\">
                         <span class=\"fas fa-sign-in-alt\"></span>
-                        Off
+                        Deconnexion
                     </a>
                 </div>
             ";
         } else {
-            // line 40
+            // line 37
             echo "                <div class=\"text-center m-1\">
                     <a id=\"register\" href=\"";
-            // line 41
+            // line 38
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("register");
             echo "\" class=\"btn btn-outline-primary\">
                         <span class=\"fas fa-file-signature\"></span>
@@ -113,7 +107,7 @@ class __TwigTemplate_2b9516bfa996768c5701746d40260ebdf309acbe2016696fbb547fdf3c1
                 </div>
                 <div class=\"text-center m-1\">
                     <a id=\"authentication\" href=\"";
-            // line 47
+            // line 44
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("login");
             echo "\" class=\"btn btn-outline-success\">
                         <span class=\"fas fa-sign-in-alt\"></span>
@@ -122,7 +116,7 @@ class __TwigTemplate_2b9516bfa996768c5701746d40260ebdf309acbe2016696fbb547fdf3c1
                 </div>
             ";
         }
-        // line 53
+        // line 50
         echo "        </ul>
     </div>
 </nav>
@@ -147,7 +141,7 @@ class __TwigTemplate_2b9516bfa996768c5701746d40260ebdf309acbe2016696fbb547fdf3c1
 
     public function getDebugInfo()
     {
-        return array (  126 => 53,  117 => 47,  108 => 41,  105 => 40,  96 => 34,  87 => 28,  81 => 25,  78 => 24,  76 => 23,  68 => 18,  59 => 12,  47 => 3,  43 => 1,);
+        return array (  120 => 50,  111 => 44,  102 => 38,  99 => 37,  90 => 31,  81 => 25,  72 => 19,  69 => 18,  67 => 17,  59 => 12,  47 => 3,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -168,15 +162,12 @@ class __TwigTemplate_2b9516bfa996768c5701746d40260ebdf309acbe2016696fbb547fdf3c1
                 Accueil
                 </a>
             </li>
-            <li id=\"tricks\" class=\"active nav-item\">
-                <a class=\"nav-link\" href=\"{{ path('tricks') }}\">
-                    <span class=\"fas fa-user\"></span>
-                    Tricks
-                </a>
-            </li>
             {% if app.user %}
                 <li id=\"new-trick\" class=\"active nav-item\">
-                    <a class=\"nav-link\" href=\"{{ path('trick_new') }}\">Nouvelle trick</a>
+                    <a class=\"nav-link\" href=\"{{ path('trick_new') }}\">
+                        <span class=\"fas fa-snowboarding\"></span>
+                        Nouvelle trick
+                    </a>
                 </li>
                 <li id=\"profile\" class=\"active nav-item\">
                     <a class=\"nav-link\" href=\"{{ path('profile') }}\">
@@ -185,9 +176,9 @@ class __TwigTemplate_2b9516bfa996768c5701746d40260ebdf309acbe2016696fbb547fdf3c1
                     </a>
                 </li>
                 <div class=\"text-center m-1\">
-                    <a id=\"authentication\" href=\"{{ path('logout') }}\" class=\"btn btn-outline-error\">
+                    <a id=\"authentication\" href=\"{{ path('logout') }}\" class=\"btn btn-outline-danger\">
                         <span class=\"fas fa-sign-in-alt\"></span>
-                        Off
+                        Deconnexion
                     </a>
                 </div>
             {% else %}

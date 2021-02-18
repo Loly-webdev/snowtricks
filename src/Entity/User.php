@@ -55,6 +55,11 @@ class User implements UserInterface
     private $passwordVerification;
 
     /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $role;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $created_at;
@@ -160,6 +165,18 @@ class User implements UserInterface
     public function setPasswordVerification(string $passwordVerification): self
     {
         $this->passwordVerification = $passwordVerification;
+
+        return $this;
+    }
+
+    /**
+     * @param string|null $role
+     *
+     * @return $this
+     */
+    public function setRole(?string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
@@ -327,5 +344,10 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
     }
 }

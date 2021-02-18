@@ -20,7 +20,11 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/app.js')
+    .addEntry('js/app', './assets/js/app.js')
+    .addEntry('js/add-trick', './assets/js/add-trick.js')
+    .addEntry('js/edit-trick', './assets/js/edit-trick.js')
+
+    .addStyleEntry('styles/app', './assets/styles/app.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
@@ -57,6 +61,13 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
+    .enablePostCssLoader()
+    //copy files
+    .copyFiles({
+        from: './assets/images',
+        to: '[path][name].[hash:8].[ext]',
+        context: './assets'
+    })
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()

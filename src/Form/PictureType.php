@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Picture;
+use App\Form\ApplicationType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -24,7 +26,7 @@ class PictureType extends ApplicationType
             ->add('file', FileType::class,
                   [
                       'required' => false])
-            ->add('caption', TextType::class, $this->fieldsConfiguration("Veuillez saisir un titre."));
+            ->add('caption', TextType::class, $this->fieldsConfiguration("Titre de l'image"));
     }
 
     /**

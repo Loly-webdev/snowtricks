@@ -1,35 +1,23 @@
 {% extends 'base.html.twig' %}
+{% block title %}S'inscrire{% endblock %}
+{% form_theme form 'security/_form-renderer.html.twig' %}
 {% block content %}
-        {% for message in app.flashes('message') %}
-                <div class="alert alert-success text-center" role="alert">
-                        {{ message }}
-                </div>
-        {% endfor %}
-        {% for message in app.flashes('danger') %}
-                <div class="alert alert-danger text-center" role="alert">
-                        {{ message }}
-                </div>
-        {% endfor %}
-        {% for message in app.flashes('warning') %}
-                <div class="alert alert-warning text-center" role="alert">
-                        {{ message }}
-                </div>
-        {% endfor %}
-        <div class="container my-5 text-center"><br>
-                <h1 class="mb-5">Inscription</h1>
-                <div class=" border py-4 px-5">
-                        {{ form_start(form) }}
-                        {{ form_row(form.username, {'label' : "Login : ", 'attr' : {'placeholder': "Pseudo"}}) }}<br>
-                        {{ form_row(form.email, {'label' : "Email : ", 'attr' : {'placeholder': "Votre email"}}) }}<br>
-                        {{ form_row(form.password, {'label' : "Mot de Passe : ", 'attr' : {'placeholder': "Mot de passe"}}) }}<br>
-                        {{ form_row(form.passwordVerification, {'label' : "Confirmer le mot de passe : ", 'attr' : {'placeholder': "Confirmez Mot de passe"}}) }}<br>
-                        {{ form_row(form.profile_picture, {'label' : "Photo de Profil : ", 'attr' : {'placeholder': "Votre photo de profil"}}) }}<br>
-                        <button class="btn-round-shadow btn btn-primary">
-                                <span class="fas fa-file-signature"></span>
-                                Inscription
-                        </button>
-
-                        {{ form_end(form) }}
-                </div><br>
+    <section class="register">
+        <div class="register-title container my-5 text-center">
+            <h2 class="mb-5">Inscription</h2>
+            <div class="register-form border py-5">
+                {{ form_start(form) }}
+                {{ form_row(form.username) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.password) }}
+                {{ form_row(form.passwordVerification) }}
+                {{ form_row(form.profile_picture) }}
+                <button type="submit" class="mt-2 btn-round-shadow btn btn-primary">
+                    <span class="fas fa-file-signature"></span>
+                    Inscription
+                </button>
+                {{ form_end(form) }}
+            </div>
         </div>
+    </section>
 {% endblock %}

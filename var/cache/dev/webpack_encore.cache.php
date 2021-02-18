@@ -10,15 +10,35 @@ return [[
 
 0 => [
     'entrypoints' => [
-        'app' => [
+        'js/app' => [
             'js' => [
                 '/build/runtime.js',
-                '/build/vendors~app.js',
-                '/build/app.js',
+                '/build/vendors~js/app.js',
+                '/build/js/app.js',
             ],
-            'css' => [
-                '/build/vendors~app.css',
-                '/build/app.css',
+        ],
+        'js/add-trick' => [
+            'js' => [
+                '/build/runtime.js',
+                '/build/vendors~js/add-trick~js/edit-trick.js',
+                '/build/js/add-trick.js',
+            ],
+        ],
+        'js/edit-trick' => [
+            'js' => [
+                '/build/runtime.js',
+                '/build/vendors~js/add-trick~js/edit-trick.js',
+                '/build/js/edit-trick.js',
+            ],
+        ],
+        'css/base' => [
+            'js' => [
+                '/build/runtime.js',
+            ],
+        ],
+        'css/app' => [
+            'js' => [
+                '/build/runtime.js',
             ],
         ],
     ],
