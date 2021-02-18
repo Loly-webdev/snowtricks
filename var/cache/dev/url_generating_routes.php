@@ -24,7 +24,6 @@ return [
     'reset_password' => [['id', 'token'], ['_controller' => 'App\\Controller\\Security\\ResetPasswordController::resetPassword'], [], [['variable', '/', '[^/]++', 'token', true], ['variable', '/', '[^/]++', 'id', true], ['text', '/réinitialisation']], [], []],
     'profile' => [[], ['_controller' => 'App\\Controller\\Security\\UserController::edit'], [], [['text', '/mon-compte']], [], []],
     'update_password' => [[], ['_controller' => 'App\\Controller\\Security\\UserController::updatePassword'], [], [['text', '/update_password']], [], []],
-    'tricks' => [[], ['_controller' => 'App\\Controller\\TrickController::index'], [], [['text', '/tricks']], [], []],
     'trick_new' => [[], ['_controller' => 'App\\Controller\\TrickController::create'], [], [['text', '/trick/new']], [], []],
     'trick_edit' => [['slug'], ['_controller' => 'App\\Controller\\TrickController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'slug', true], ['text', '/trick']], [], []],
     'trick_delete' => [['slug'], ['_controller' => 'App\\Controller\\TrickController::delete'], [], [['text', '/delete'], ['variable', '/', '[^/]++', 'slug', true], ['text', '/trick']], [], []],
