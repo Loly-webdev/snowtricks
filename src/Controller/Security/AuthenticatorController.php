@@ -3,9 +3,9 @@
 namespace App\Controller\Security;
 
 use LogicException;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -33,8 +33,8 @@ class AuthenticatorController extends AbstractController
 
         return $this->render('security/login.html.twig', [
             'controller_name' => 'AccountController',
-            'last_username' => $lastUsername,
-            'error' => $error
+            'lastUsername'    => $lastUsername,
+            'error'           => $error
         ]);
     }
 

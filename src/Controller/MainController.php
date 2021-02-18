@@ -11,12 +11,15 @@ class MainController extends AbstractController
 {
     /**
      * @Route("/", name="home")
+     * @param TrickRepository $trickRepository
+     *
      * @return Response
      */
-    public function index(): Response
+    public function index(TrickRepository $trickRepository): Response
     {
         return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
+            'controller_name' => 'HomeController',
+            'tricks'          => $trickRepository->findAll()
         ]);
     }
 }
