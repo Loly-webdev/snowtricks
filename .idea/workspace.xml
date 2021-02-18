@@ -2,21 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b166fe67-dffe-4d94-94de-5b7e68a60709" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/var/cache/dev/profiler/e4/aa/aaaae4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/PictureType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PictureType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/TrickType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/TrickType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/VideoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/VideoType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/trick/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/trick/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/trick/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/trick/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/trick/tricks.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/trick-form.fr.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/translations/trick-form.fr.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/var/cache/dev/App_KernelDevDebugContainer.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/App_KernelDevDebugContainer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/var/cache/dev/profiler/63/9c/829c63" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/var/cache/dev/profiler/b1/85/c085b1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/var/cache/dev/profiler/index.csv" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/profiler/index.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/var/cache/dev/translations/catalogue.fr.W68WgaY.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/translations/catalogue.fr.W68WgaY.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/9b/9bf6d71c18aeb7d3688b03bc9af2394fc89343a4c57bca949272305ae84fd140.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/9b/9bf6d71c18aeb7d3688b03bc9af2394fc89343a4c57bca949272305ae84fd140.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/var/log/dev.log" beforeDir="false" afterPath="$PROJECT_DIR$/var/log/dev.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -268,6 +256,7 @@
       <workItem from="1611821971552" duration="333000" />
       <workItem from="1611822336130" duration="31719000" />
       <workItem from="1613034564496" duration="26597000" />
+      <workItem from="1613396384414" duration="595000" />
     </task>
     <servers />
   </component>
