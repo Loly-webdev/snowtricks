@@ -5,7 +5,6 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Trick;
 use App\Entity\Comment;
-use App\Repository\TrickRepository;
 use App\Form\TrickType;
 use App\Form\CommentType;
 use App\Service\Paginator;
@@ -143,6 +142,7 @@ class TrickController extends AbstractController
                 'slug' => $trick->getSlug()
             ]);
         }
+
         return $this->render('trick/edit.html.twig', [
             'controller_name' => 'TrickController',
             'trick'           => $trick,

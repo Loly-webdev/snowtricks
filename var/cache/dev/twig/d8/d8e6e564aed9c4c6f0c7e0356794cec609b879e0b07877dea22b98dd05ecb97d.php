@@ -101,6 +101,57 @@ class __TwigTemplate_32d3ff867c0c47a80ac34bd2396b5d553b76ab5df6cf37ecf243346fdf3
             ";
         }
         // line 12
+        echo "            ";
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 12, $this->source); })()), "flashes", [0 => "message"], "method", false, false, false, 12));
+        foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
+            // line 13
+            echo "                <div class=\"alert alert-success text-center\" role=\"alert\">
+                    ";
+            // line 14
+            echo twig_escape_filter($this->env, $context["message"], "html", null, true);
+            echo "
+                </div>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 17
+        echo "            ";
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 17, $this->source); })()), "flashes", [0 => "danger"], "method", false, false, false, 17));
+        foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
+            // line 18
+            echo "                <div class=\"alert alert-danger text-center\" role=\"alert\">
+                    ";
+            // line 19
+            echo twig_escape_filter($this->env, $context["message"], "html", null, true);
+            echo "
+                </div>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 22
+        echo "            ";
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 22, $this->source); })()), "flashes", [0 => "warning"], "method", false, false, false, 22));
+        foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
+            // line 23
+            echo "                <div class=\"alert alert-warning text-center\" role=\"alert\">
+                    ";
+            // line 24
+            echo twig_escape_filter($this->env, $context["message"], "html", null, true);
+            echo "
+                </div>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 27
         echo "            <form action=\"";
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("login");
         echo "\" class=\"login-form\" method=\"POST\">
@@ -110,8 +161,8 @@ class __TwigTemplate_32d3ff867c0c47a80ac34bd2396b5d553b76ab5df6cf37ecf243346fdf3
                     </label>
                     <input type=\"text\" name=\"_username\" placeholder=\"Votre pseudo.\"
                            value=\"";
-        // line 18
-        echo twig_escape_filter($this->env, (isset($context["lastUsername"]) || array_key_exists("lastUsername", $context) ? $context["lastUsername"] : (function () { throw new RuntimeError('Variable "lastUsername" does not exist.', 18, $this->source); })()), "html", null, true);
+        // line 33
+        echo twig_escape_filter($this->env, (isset($context["lastUsername"]) || array_key_exists("lastUsername", $context) ? $context["lastUsername"] : (function () { throw new RuntimeError('Variable "lastUsername" does not exist.', 33, $this->source); })()), "html", null, true);
         echo "\" required>
                 </div>
                 <div class=\"login-form-row\">
@@ -123,7 +174,7 @@ class __TwigTemplate_32d3ff867c0c47a80ac34bd2396b5d553b76ab5df6cf37ecf243346fdf3
                 </div>
                 <p class=\"my-3 font-weight-bold\">
                     <a href=\"";
-        // line 28
+        // line 43
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("forgotten_password");
         echo "\">
                         Mot de passe oublié ?
@@ -157,7 +208,7 @@ class __TwigTemplate_32d3ff867c0c47a80ac34bd2396b5d553b76ab5df6cf37ecf243346fdf3
 
     public function getDebugInfo()
     {
-        return array (  127 => 28,  114 => 18,  104 => 12,  98 => 9,  95 => 8,  93 => 7,  88 => 4,  78 => 3,  59 => 2,  36 => 1,);
+        return array (  178 => 43,  165 => 33,  155 => 27,  146 => 24,  143 => 23,  138 => 22,  129 => 19,  126 => 18,  121 => 17,  112 => 14,  109 => 13,  104 => 12,  98 => 9,  95 => 8,  93 => 7,  88 => 4,  78 => 3,  59 => 2,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -173,6 +224,21 @@ class __TwigTemplate_32d3ff867c0c47a80ac34bd2396b5d553b76ab5df6cf37ecf243346fdf3
                     {{ error.messageKey|trans(error.messageData,'security') }}
                 </div>
             {% endif %}
+            {% for message in app.flashes('message') %}
+                <div class=\"alert alert-success text-center\" role=\"alert\">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('danger') %}
+                <div class=\"alert alert-danger text-center\" role=\"alert\">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('warning') %}
+                <div class=\"alert alert-warning text-center\" role=\"alert\">
+                    {{ message }}
+                </div>
+            {% endfor %}
             <form action=\"{{ path('login') }}\" class=\"login-form\" method=\"POST\">
                 <div class=\"login-form-row\">
                     <label class=\"font-weight-bold text-info\" for=\"_username\">

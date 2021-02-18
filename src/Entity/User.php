@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use RuntimeException;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -57,7 +58,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $role;
+    private $role = 'ROLE_USER';
 
     /**
      * @ORM\Column(type="datetime")

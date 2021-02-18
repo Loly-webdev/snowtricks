@@ -12,7 +12,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 class Paginator
 {
     private $entity;
-    private $limit;
+    private $limit = 5;
     /**
      * @var int
      */
