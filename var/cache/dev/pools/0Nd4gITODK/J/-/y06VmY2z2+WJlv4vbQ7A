@@ -1,7 +1,0 @@
-<?php //%255B%255BC%255DApp%255CKernel%2523getCacheDir%255D%255B1%255D
-
-<<<<<<< HEAD
-return [PHP_INT_MAX, 1613637984];
-=======
-return [PHP_INT_MAX, 1613045875];
->>>>>>> acd2ab412f5ccef116a74e8e4789428dd83afb7d
