@@ -32,7 +32,7 @@ class UserController extends AbstractController
 
     public function __construct(EntityManagerInterface $manager, TokenGeneratorInterface $tokenGenerator)
     {
-        $this->manager = $manager;
+        $this->manager        = $manager;
         $this->tokenGenerator = $tokenGenerator;
     }
 
@@ -64,8 +64,8 @@ class UserController extends AbstractController
         }
         return $this->render('security/profile.html.twig', [
             'controller_name' => 'AccountController',
-            'user' => $this->getUser(),
-            'form' => $form->createView()
+            'user'            => $this->getUser(),
+            'form'            => $form->createView()
         ]);
     }
 
@@ -105,7 +105,7 @@ class UserController extends AbstractController
             }
 
             $mailer->sendMessage('noreply@snowtricks.com', $user->getEmail(), $user->getUsername(), 'Modifier votre mot de passe', 'email/update-password.html.twig.html.twig', [
-                'user' => $user,
+                'user'  => $user,
                 'token' => $user->getResetToken()
             ]);
 
@@ -114,9 +114,9 @@ class UserController extends AbstractController
             return $this->redirectToRoute('profile');
         }
 
-        return $this->render('security/update-password.html.twig.html.twig', [
+        return $this->render('security/update-password.html.twig', [
             'controller_name' => 'AccountController',
-            'form' => $form->createView(),
+            'form'            => $form->createView(),
         ]);
     }
 }

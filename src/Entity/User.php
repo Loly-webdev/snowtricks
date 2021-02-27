@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use RuntimeException;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -53,6 +54,11 @@ class User implements UserInterface
      * message="Les mots de passe saisies sont différents")
      */
     private $passwordVerification;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $role = 'ROLE_USER';
 
     /**
      * @ORM\Column(type="datetime")
@@ -160,6 +166,18 @@ class User implements UserInterface
     public function setPasswordVerification(string $passwordVerification): self
     {
         $this->passwordVerification = $passwordVerification;
+
+        return $this;
+    }
+
+    /**
+     * @param string|null $role
+     *
+     * @return $this
+     */
+    public function setRole(?string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
@@ -327,5 +345,10 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
     }
 }

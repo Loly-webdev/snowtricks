@@ -2,10 +2,10 @@
 <html lang="fr">
 <head>
     {{ include('partial/_head.html.twig') }}
-    <title>{% block title %}Snowtricks{% endblock %}</title>
+    <title>Snowtricks - {% block title %}Bienvenue{% endblock %}</title>
     {% block stylesheets %}
         {# 'app' must match the first argument to addEntry() in webpack.config.js #}
-        {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('styles/app') }}
     {% endblock %}
 </head>
 <body>
@@ -15,7 +15,7 @@
     </header>
     <main class="mt-5 mx-0 p-0">
         {% for label, messages in app.flashes %}
-            <div class="{{ label }}">
+            <div class="{{ label }}">4
                 {% for message in messages %}
                     <p>{{ message }}</p>
                 {% endfor %}
@@ -30,7 +30,9 @@
     </footer>
 {% endblock %}
 {% block javascripts %}
-    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('js/app') }}
+    {{ encore_entry_script_tags('js/add-trick') }}
+    {{ encore_entry_script_tags('js/edit-trick') }}
 {% endblock %}
 </body>
 </html>

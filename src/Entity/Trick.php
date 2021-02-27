@@ -88,10 +88,10 @@ class Trick
      */
     public function __construct()
     {
-        $this->pictures = new ArrayCollection();
+        $this->pictures   = new ArrayCollection();
         $this->created_at = new DateTime();
-        $this->videos = new ArrayCollection();
-        $this->comments = new ArrayCollection();
+        $this->videos     = new ArrayCollection();
+        $this->comments   = new ArrayCollection();
     }
 
     /**
